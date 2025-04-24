@@ -115,8 +115,7 @@
                 ['name' => 'Sare gemă', 'image' => 'Sare gemă.jpg'],
                 ['name' => 'Usturoi fulgi', 'image' => '02 Usturoi fulgi.jpg'],
                 ['name' => 'Usturoi praf', 'image' => 'Usturoi praf.jpg'],
-                ['name' => 'Membrane Colagen', 'image' => 'membrana-colagen.jpg'],
-                ['name' => 'Aditiv Salam Crud-Uscat', 'image' => 'aditiv-salam-crud.jpg'],
+                
             ]
         ],
         // Category 3: Bakery & Pastry
@@ -346,9 +345,9 @@
                     <?php // --- Informational Notice Line (Included after each category) --- ?>
                     <div class="category-info-notice animate-on-scroll" data-animation="fadeIn">
                         Informații suplimentare despre prezența produselor, prețul și condițiile de livrare le puteți afla la telefonul
-                        <a href="tel:<?php echo htmlspecialchars($noticePhoneNumber); ?>" class="notice-phone-link">
-                            <i class="fa fa-phone-square" aria-hidden="true"></i><?php echo htmlspecialchars($noticePhoneNumberDisplay); // Phone number from top ?>
-                        </a>.
+                        <a href="tel:<?php echo htmlspecialchars($noticePhoneNumber); ?>" class="notice-phone-link js-copy-phone">
+    <i class="fa fa-phone-square" aria-hidden="true"></i><?php echo htmlspecialchars($noticePhoneNumberDisplay); ?>
+</a>
                     </div>
 
                     <?php // Add divider *after* the notice, except for the last category ?>

@@ -88,23 +88,27 @@
                              <i class="fa fa-phone contact-icon" aria-hidden="true"></i>
                              <div class="contact-text">
                                  <strong>Telefon:</strong><br>
-                                 <a href="tel:<?php echo htmlspecialchars($contactInfo['phone1']); ?>"><?php echo htmlspecialchars($contactInfo['phone1Display']); ?></a>
+                                 <?php // This is phone1 ?>
+                                 <a href="tel:<?php echo htmlspecialchars($contactInfo['phone1']); ?>" class="js-copy-phone"><?php echo htmlspecialchars($contactInfo['phone1Display']); ?></a>
                                  <?php // Display second phone if available ?>
                                  <?php if (!empty($contactInfo['phone2'])): ?>
-                                     <br><a href="tel:<?php echo htmlspecialchars($contactInfo['phone2']); ?>"><?php echo htmlspecialchars($contactInfo['phone2Display']); ?></a>
+                                     <br>
+                                     <?php // This is phone2 - ADD THE CLASS HERE ?>
+                                     <a href="tel:<?php echo htmlspecialchars($contactInfo['phone2']); ?>" class="js-copy-phone"><?php echo htmlspecialchars($contactInfo['phone2Display']); ?></a>
                                  <?php endif; ?>
                              </div>
                         </div>
                         <?php $contactBlockCurrentDelay += $contactBlockDelayIncrement; ?>
 
-                        <?php // Fax Block - Preserved ?>
-                         <div class="contact-block animate-on-scroll" data-animation="<?php echo $contactBlockAnimation; ?>" data-delay="<?php echo $contactBlockCurrentDelay; ?>">
-                             <i class="fa fa-fax contact-icon" aria-hidden="true"></i>
-                             <div class="contact-text">
-                                 <strong>Fax:</strong><br>
-                                 <a href="tel:<?php echo htmlspecialchars($contactInfo['fax']); ?>"><?php echo htmlspecialchars($contactInfo['faxDisplay']); ?></a>
-                             </div>
-                        </div>
+                        <?php // Fax Block ?>
+                     <div class="contact-block animate-on-scroll" data-animation="<?php echo $contactBlockAnimation; ?>" data-delay="<?php echo $contactBlockCurrentDelay; ?>">
+                         <i class="fa fa-fax contact-icon" aria-hidden="true"></i>
+                         <div class="contact-text">
+                             <strong>Fax:</strong><br>
+                             <?php // --- Ensure class="js-copy-phone" is added --- ?>
+                             <a href="tel:<?php echo htmlspecialchars($contactInfo['fax']); ?>" class="js-copy-phone"><?php echo htmlspecialchars($contactInfo['faxDisplay']); ?></a>
+                         </div>
+                    </div>
                         <?php $contactBlockCurrentDelay += $contactBlockDelayIncrement; ?>
 
                         <?php // Email Block - Preserved ?>

@@ -87,7 +87,7 @@
 }
 
 /* Dark Mode Variables - "Blacker" Theme */
-body.dark-mode {
+html.dark-mode {
     /* Core Palette */
     --body-bg-color: #111213;          /* Very dark grey/off-black */
     --medium-bg-color: #1f2022;        /* Slightly lighter dark grey */
@@ -220,7 +220,7 @@ hr.section-divider { border: 0; height: var(--border-width); background-color: v
     border-bottom: var(--border-width) solid var(--header-border); /* Use theme border */
 }
 /* Define header bg rgba for dark mode */
-body.dark-mode { --header-bg-rgb: 31, 32, 34; } /* Corresponds to #1f2022 */
+html.dark-mode{ --header-bg-rgb: 31, 32, 34; } /* Corresponds to #1f2022 */
 
 @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1;} }
 .header-container { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; }
@@ -306,7 +306,7 @@ body.dark-mode { --header-bg-rgb: 31, 32, 34; } /* Corresponds to #1f2022 */
 .social-links a { color: var(--text-color-light); /* Adjusted color */ font-size: 1.5rem; transition: var(--transition-default); }
 .social-links a:hover, .social-links a:focus { color: var(--primary-color); /* Use primary color for hover */ transform: scale(1.15) rotate(5deg); }
 .copyright-notice { background-color: rgba(0, 0, 0, 0.3); padding: calc(var(--base-spacing) * 1.2) 0; text-align: center; font-size: 0.85rem; color: var(--text-color-light); transition: background-color var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing); }
-body.dark-mode .copyright-notice { background-color: rgba(255, 255, 255, 0.05); color: var(--text-color-light); }
+html.dark-mode .copyright-notice { background-color: rgba(255, 255, 255, 0.05); color: var(--text-color-light); }
 
 /* --- Back to Top Button --- */
 /* ... Back to Top styles remain the same as v21 ... */
@@ -322,7 +322,7 @@ body.dark-mode .copyright-notice { background-color: rgba(255, 255, 255, 0.05); 
 .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center center; z-index: 1; transform: scale(1.05); transition: transform 6s ease-out; }
 .hero-section:hover .hero-background { transform: scale(1.1); } /* Subtle zoom on hover */
 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)); z-index: 2; transition: background-color var(--transition-speed) var(--transition-timing); }
-body.dark-mode .hero-overlay { background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)); } /* Dark overlay for dark mode */
+html.dark-mode .hero-overlay { background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)); } /* Dark overlay for dark mode */
 .hero-content { position: relative; z-index: 3; padding: calc(var(--base-spacing) * 2); max-width: 900px; }
 .hero-title { color: var(--white); margin-bottom: 0.6em; font-weight: 700; font-size: clamp(2.6rem, 6vw, 4rem); text-shadow: 1px 2px 5px rgba(0,0,0,0.7); }
 
@@ -370,7 +370,7 @@ body.dark-mode .hero-overlay { background: linear-gradient(rgba(0, 0, 0, 0.4), r
 .card-image-container img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .card:hover .card-image-container img { transform: scale(1.08); }
 .card-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(var(--primary-rgb), 0.7); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity var(--transition-speed) var(--transition-timing), visibility var(--transition-speed) var(--transition-timing); color: var(--button-text); }
-body.dark-mode .card-image-overlay { background-color: rgba(var(--primary-rgb), 0.6); }
+html.dark-mode .card-image-overlay { background-color: rgba(var(--primary-rgb), 0.6); }
 .card:hover .card-image-overlay { opacity: 1; visibility: visible; }
 .card-overlay-icon .fa { font-size: 2.2rem; transform: scale(0.7); transition: transform var(--transition-speed) var(--transition-timing) 0.1s; }
 .card:hover .card-overlay-icon .fa { transform: scale(1); }
@@ -400,7 +400,7 @@ body.dark-mode .card-image-overlay { background-color: rgba(var(--primary-rgb), 
 .parallax-section { padding: 0; overflow: hidden; }
 .parallax-window { min-height: 450px; background: transparent; position: relative; display: flex; align-items: center; justify-content: center; }
 .parallax-content { position: relative; z-index: 2; color: var(--white); padding: calc(var(--base-spacing) * 3.5); background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */ border-radius: var(--border-radius); max-width: 750px; box-shadow: 0 0 30px rgba(0,0,0,0.3); transition: background-color var(--transition-speed) var(--transition-timing); }
-body.dark-mode .parallax-content { background-color: rgba(0, 0, 0, 0.75); } /* Even darker in dark mode */
+html.dark-mode.parallax-content { background-color: rgba(0, 0, 0, 0.75); } /* Even darker in dark mode */
 .parallax-content h2 { color: var(--white); margin-bottom: 0.8em; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); }
 .parallax-content p { font-size: 1.15rem; margin-bottom: 1.8em; line-height: 1.7; }
 .partner-section { transition: background-color var(--transition-speed) var(--transition-timing); }
@@ -434,8 +434,8 @@ body.dark-mode .parallax-content { background-color: rgba(0, 0, 0, 0.75); } /* E
 .mission-vision-section [class^="col-"] { padding: var(--section-padding-vertical) calc(var(--grid-gap) * 1.5); margin-bottom: 0; display: flex; flex-direction: column; transition: background-color var(--transition-speed) var(--transition-timing); }
 .mission-content { background-color: var(--medium-bg-color); }
 .vision-content { background-color: var(--white); }
-body.dark-mode .mission-content { background-color: var(--medium-bg-color); }
-body.dark-mode .vision-content { background-color: var(--body-bg-color); }
+html.dark-mode .mission-content { background-color: var(--medium-bg-color); }
+html.dark-mode .vision-content { background-color: var(--body-bg-color); }
 .mission-vision-section .section-icon { font-size: 4rem; color: var(--secondary-color); opacity: 0.15; margin-bottom: 1.2em; text-align: left; line-height: 1; transition: color var(--transition-speed) var(--transition-timing); }
 .mission-vision-section h2 { margin-top: -1.2em; position: relative; color: var(--heading-color); /* Use heading color */ margin-bottom: 1.2em; transition: color var(--transition-speed) var(--transition-timing); }
 .mission-vision-section h2::after { display: none; }
@@ -446,7 +446,7 @@ body.dark-mode .vision-content { background-color: var(--body-bg-color); }
 .value-item { text-align: center; padding: calc(var(--base-spacing) * 2.5); background-color: var(--card-bg); border-radius: var(--border-radius); border: var(--border-width) solid var(--card-border); transition: var(--transition-default), transform 0.2s ease-out, border-color var(--transition-speed) var(--transition-timing), border-top-color var(--transition-speed) var(--transition-timing); box-shadow: var(--shadow-soft); border-top: 5px solid transparent; position: relative; top: 0; }
 .value-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-large); border-color: var(--secondary-color); border-top-color: var(--secondary-color); }
 .value-icon { margin-bottom: 1.2em; width: 75px; height: 75px; line-height: 75px; border-radius: 50%; background-color: rgba(var(--secondary-rgb), 0.1); display: inline-block; margin-left: auto; margin-right: auto; transition: background-color var(--transition-speed) var(--transition-timing); }
-body.dark-mode .value-icon { background-color: rgba(var(--secondary-rgb), 0.2); }
+html.dark-mode.value-icon { background-color: rgba(var(--secondary-rgb), 0.2); }
 .value-icon .fa { font-size: 2.5rem; color: var(--secondary-color); transition: transform var(--transition-speed) var(--transition-timing), color var(--transition-speed) var(--transition-timing); vertical-align: middle; }
 .value-item:hover .value-icon .fa { transform: scale(1.1) rotate(-5deg); }
 .value-title { font-size: 1.3rem; margin-bottom: 0.7em; color: var(--heading-color); }
@@ -485,7 +485,7 @@ body.dark-mode .value-icon { background-color: rgba(var(--secondary-rgb), 0.2); 
 .partner-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: calc(var(--base-spacing) * 1.5); background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--border-radius); box-shadow: var(--shadow-soft); transition: var(--transition-default), transform 0.2s ease-out; height: 100%; }
 .partner-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-medium); border-color: var(--secondary-color); }
 .partner-logo-container { width: 100%; max-width: 200px; /* Limit logo size */ min-height: 100px; /* Ensure space */ display: flex; align-items: center; justify-content: center; margin-bottom: calc(var(--base-spacing) * 1.5); background-color: var(--white); /* Ensure logo bg is white */ padding: var(--base-spacing); border-radius: var(--border-radius); }
-body.dark-mode .partner-logo-container { background-color: var(--white); /* Keep logos on white bg */ }
+html.dark-mode .partner-logo-container { background-color: var(--white); /* Keep logos on white bg */ }
 .partner-logo-container a { display: block; transition: transform 0.2s ease-out; }
 .partner-logo-container a:hover { transform: scale(1.05); }
 .partner-logo { max-width: 100%; max-height: 80px; /* Limit height */ object-fit: contain; }
@@ -539,7 +539,7 @@ body.dark-mode .partner-logo-container { background-color: var(--white); /* Keep
 .contact-text strong { color: var(--heading-color); display: block; margin-bottom: 0.2em; font-weight: 600; transition: color var(--transition-speed) var(--transition-timing); }
 .map-container { border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-medium); border: 1px solid var(--card-border); transition: border-color var(--transition-speed) var(--transition-timing); }
 .map-container iframe { display: block; width: 100%; border: none; filter: none; /* Remove grayscale filter */ transition: filter 0.3s ease; }
-body.dark-mode .map-container iframe { filter: invert(1) hue-rotate(180deg) saturate(0.6) brightness(1.1); } /* Keep dark mode filter for map */
+html.dark-mode .map-container iframe { filter: invert(1) hue-rotate(180deg) saturate(0.6) brightness(1.1); } /* Keep dark mode filter for map */
 .contact-form { margin-top: var(--section-padding-vertical); }
 .contact-form .form-row { display: flex; gap: var(--grid-gap); margin-bottom: var(--base-spacing); }
 .contact-form .form-group { flex: 1; margin-bottom: var(--base-spacing); }
@@ -547,8 +547,8 @@ body.dark-mode .map-container iframe { filter: invert(1) hue-rotate(180deg) satu
 .contact-form input[type="text"], .contact-form input[type="email"], .contact-form input[type="tel"], .contact-form textarea { width: 100%; padding: 0.8em 1em; border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--card-bg); color: var(--text-color); transition: var(--transition-default); } /* Use card-bg for inputs */
 .contact-form textarea { min-height: 150px; resize: vertical; }
 .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1); }
-/* body.dark-mode .contact-form input, body.dark-mode .contact-form textarea { background-color: var(--medium-bg-color); border-color: var(--border-color); color: var(--text-color); } */ /* Already covered by variables */
-body.dark-mode .contact-form input:focus, body.dark-mode .contact-form textarea:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2); }
+/* html.dark-mode.contact-form input, html.dark-mode .contact-form textarea { background-color: var(--medium-bg-color); border-color: var(--border-color); color: var(--text-color); } */ /* Already covered by variables */
+html.dark-mode .contact-form input:focus, html.dark-mode .contact-form textarea:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2); }
 .contact-form button { margin-top: var(--base-spacing); }
 
 
@@ -600,13 +600,623 @@ body.mobile-menu-active { overflow: hidden; }
 /* ... Dark Mode Toggle styles remain the same as v21 ... */
 .dark-mode-toggle { position: fixed; bottom: 90px; right: 25px; background-color: var(--medium-bg-color); color: var(--text-color); border: 1px solid var(--border-color); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; box-shadow: var(--shadow-soft); transition: var(--transition-default); z-index: 998; }
 .dark-mode-toggle:hover, .dark-mode-toggle:focus { background-color: var(--primary-color); color: var(--button-text); transform: scale(1.05); box-shadow: var(--shadow-medium); }
-body.dark-mode .dark-mode-toggle { background-color: var(--light-bg-color); color: var(--text-color); border-color: var(--border-color); }
-body.dark-mode .dark-mode-toggle:hover, body.dark-mode .dark-mode-toggle:focus { background-color: var(--primary-color); color: var(--button-text); }
+html.dark-mode .dark-mode-toggle { background-color: var(--light-bg-color); color: var(--text-color); border-color: var(--border-color); }
+html.dark-mode .dark-mode-toggle:hover, html.dark-mode .dark-mode-toggle:focus { background-color: var(--primary-color); color: var(--button-text); }
 .dark-mode-toggle .fa-sun-o { display: none; }
 .dark-mode-toggle .fa-moon-o { display: inline-block; }
-body.dark-mode .dark-mode-toggle .fa-sun-o { display: inline-block; }
-body.dark-mode .dark-mode-toggle .fa-moon-o { display: none; }
+html.dark-mode .dark-mode-toggle .fa-sun-o { display: inline-block; }
+html.dark-mode .dark-mode-toggle .fa-moon-o { display: none; }
 
 /* --- Print Styles (Basic) --- */
 /* ... Print styles remain the same as v21 ... */
 @media print { body { background-color: #fff; color: #000; } .site-header, .site-footer, .back-to-top, .dark-mode-toggle, .hero-section, .parallax-section, .contact-form-section, .contact-prompt { display: none; } a { text-decoration: none; color: inherit; } a[href^="http"]:after { content: " (" attr(href) ")"; font-size: 90%; } .container { max-width: 100%; padding: 0; } .section-padding { padding: 2em 0; } h1, h2, h3 { color: #000; } .light-bg, .medium-bg { background-color: transparent; border: none; } .card, .partner-card, .timeline-content, .value-item { box-shadow: none; border: 1px solid #ccc; } .animate-on-scroll { opacity: 1 !important; } .map-container { border: 1px solid #ccc; } .map-container iframe { filter: grayscale(1); } }
+/* == Index Page - IMPROVED Partner Section Styles == */
+
+.partner-section {
+    /* Ensure the light-bg provides a subtle contrast if body is white */
+    /* background-color: var(--light-bg-color); */ /* Already set by class */
+    overflow: hidden; /* Prevent potential overflow issues */
+}
+
+.partner-section-content {
+    display: flex;
+    flex-direction: column; /* Mobile: Stack vertically */
+    align-items: center; /* Center items in column */
+    text-align: center; /* Center text on mobile */
+    gap: 1.5rem; /* Space between logo and text on mobile */
+    padding: 2rem 0; /* Add vertical padding */
+}
+
+.partner-logo-container {
+    max-width: 180px; /* Logo size for mobile */
+    width: 100%;
+    /* Style the container to frame the white logo */
+    background-color: var(--white); /* Ensure background is white behind logo */
+    padding: 1rem; /* Add padding around the logo */
+    border: 1px solid var(--border-color); /* Subtle border */
+    border-radius: var(--border-radius); /* Match theme's border radius */
+    box-shadow: var(--shadow-soft); /* Subtle shadow for depth */
+    transition: var(--transition-default); /* Smooth transition */
+}
+
+.partner-section-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Ensure logo fits nicely if padding is added */
+}
+
+.partner-text-container {
+    max-width: 550px; /* Limit text width for readability */
+}
+
+/* Keep title and underline centered on mobile */
+.partner-text-container .section-title {
+    text-align: center;
+    margin-bottom: 0.8em; /* Adjust spacing */
+}
+.partner-text-container .section-title::after {
+   margin: 0.6em auto 0; /* Center underline */
+}
+
+.partner-section .partner-link {
+    font-size: 1.1rem; /* Slightly larger link text */
+    margin-bottom: 0.5rem;
+}
+
+.partner-section .partner-description {
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+}
+
+
+/* Responsive adjustments for Tablet and Desktop */
+@media (min-width: 768px) {
+    .partner-section-content {
+        flex-direction: row; /* Switch to side-by-side */
+        justify-content: center; /* Center group horizontally */
+        align-items: center; /* Align items vertically */
+        text-align: left; /* Align text container left */
+        gap: 3rem; /* Increase spacing */
+    }
+    .partner-logo-container {
+        max-width: 240px; /* Increased base/mobile size */
+        width: 100%;
+        flex-shrink: 0;
+        background-color: var(--white);
+        padding: 1.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition-default);
+    }
+    .partner-logo-container:hover {
+         box-shadow: var(--shadow-medium); /* Enhance shadow on hover */
+         transform: translateY(-3px); /* Slight lift effect */
+    }
+
+
+    .partner-text-container {
+        max-width: none; /* Remove max width constraint */
+    }
+
+    /* Align title and underline left on desktop */
+    .partner-text-container .section-title {
+        text-align: left;
+    }
+    .partner-text-container .section-title::after {
+        margin-left: 0;
+        margin-right: auto; /* Keep aligned left */
+    }
+}
+
+@media (min-width: 992px) {
+    .partner-section-content {
+        gap: 4rem; /* More space on wider screens */
+    }
+    .partner-logo-container {
+        max-width: 260px;
+    }
+    
+}
+.partner-logo-container a {
+    display: block; /* Make the link a block element */
+}
+.logo-container a {
+    text-decoration: none; /* Remove underline from link if any */
+    display: inline-block; /* Helps contain the floated/inline-block elements */
+}
+
+.logo-image {
+    /* Ensure a transition is defined for smooth hover effects */
+    transition: var(--transition-default);
+     /* max-height: calc(var(--header-height) - 35px); */ /* Keep existing height styles */
+     /* width: auto; */ /* Keep existing width styles */
+     display: block; /* Make sure image behaves predictably */
+     margin: 0 auto; /* Center if container is wider */
+     background-color: transparent !important;
+}
+.tagline {
+    /* ... existing tagline styles like font-size, color, margin-top ... */
+    font-size: 0.75rem;
+    color: var(--text-color-light);
+    margin-left: 0;
+    margin-top: 4px;
+    font-style: normal;
+    white-space: nowrap;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-align: center; /* Center the tagline text */
+    /* Add transition for smooth hover effects */
+    transition: var(--transition-default);
+    /* --- Attempt to remove text shadow --- */
+    text-shadow: none !important; /* Use !important to override potential inheritance */
+    box-shadow: none !important;  /* <-- ADD THIS LINE */
+    filter: none !important;      /* <-- ADD THIS LINE (To remove potential filter: drop-shadow) */
+}
+
+/* Target the link wrapping the logo and tagline */
+.logo-container a:hover .logo-image,
+.logo-container a:focus-visible .logo-image { /* Added focus-visible for accessibility */
+    transform: scale(1.04); /* Slightly larger zoom */
+    opacity: 0.85; /* Slightly more fade */
+}
+
+.logo-container a:hover .tagline,
+.logo-container a:focus-visible .tagline { /* Added focus-visible for accessibility */
+    color: var(--secondary-color); /* Change text color to accent */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+    transform: translateY(-1px); /* Optional: subtle lift */
+}
+/* Footer Logo Base Styles */
+/* Use high specificity to override global img background */
+.footer-col-info .footer-logo-container a .footer-logo { /* <-- More specific selector */
+    background-color: transparent !important; /* Ensure override applies */
+    /* Keep other styles like display, max-height, etc. */
+    display: inline-block;
+    max-height: 65px;
+    width: auto;
+    vertical-align: middle;
+    transition: filter var(--transition-speed) var(--transition-timing);
+    /* filter: none !important; */ /* Keep commented/active based on logo color */
+}
+
+/* Optional: Ensure container adds no background/border */
+.footer-logo-container {
+     background: none;
+     border: none;
+     padding: 0; /* Reset padding if any was added */
+}
+
+/* Dark Mode Filter (Keep or remove based on logo color as before) */
+/* Ensure this selector also matches the high specificity */
+html.dark-mode .footer-col-info .footer-logo-container a .footer-logo {
+    /* filter: brightness(0) invert(1) !important; */ /* Keep or remove based on graphic color */
+}
+/* --- Main Navigation --- */
+/* ... other navigation styles ... */
+
+.main-navigation a {
+    display: flex;
+    align-items: center;
+    color: var(--heading-color);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--nav-font-size);
+    padding: 0.5em 0.3em;
+    position: relative;
+    text-decoration: none;
+    /* --- UPDATE THIS TRANSITION --- */
+    transition: color var(--transition-speed) var(--transition-timing),
+                transform var(--transition-speed) var(--transition-timing); /* Add transform to transition */
+    height: 100%;
+    white-space: nowrap;
+}
+
+/* Underline effect */
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width var(--transition-speed) var(--transition-timing);
+}
+
+/* --- UPDATE HOVER/FOCUS RULES --- */
+.main-navigation a:hover,
+.main-navigation a:focus {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transform: scale(1.08); /* Add scale effect - adjust value (e.g., 1.05, 1.1) as needed */
+}
+
+.main-navigation a:hover::after,
+.main-navigation a:focus::after {
+    width: 100%; /* Underline still animates width */
+}
+
+/* Active state might also benefit from the scale, or keep it distinct */
+.main-navigation .active a {
+    color: var(--secondary-color);
+    font-weight: 700;
+     /* Optionally add transform here too if you want active items always slightly larger */
+     /* transform: scale(1.08); */
+}
+
+.main-navigation .active a::after {
+    width: 100%;
+}
+
+/* Optional: Slightly move non-hovered items away for emphasis */
+/*
+.main-navigation ul:hover li:not(:hover) a {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+*/
+/* Style for copyable phone numbers */
+.js-copy-phone {
+    cursor: copy; /* Change cursor on hover */
+    /* Optional: Add subtle visual difference */
+    /* border-bottom: 1px dashed var(--link-color); */
+    /* transition: color 0.2s ease, border-color 0.2s ease; */
+}
+
+.js-copy-phone:hover {
+    /* Optional: Hover effect */
+    color: var(--secondary-color);
+    /* border-bottom-color: var(--secondary-color); */
+}
+/* ============================================================ */
+/* Category Showcase Grid Styles (Homepage - V3 Premium/Minimal) */
+/* ============================================================ */
+
+.category-showcase-grid {
+    display: grid;
+    /* Adjust minmax for potentially fewer columns on wider screens */
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: calc(var(--grid-gap, 2rem) * 1.8); /* Even more generous gap */
+}
+
+.category-card-wrapper {
+    /* Keep this wrapper for potential future animation needs */
+}
+
+.category-card {
+    display: flex; /* Use flex for vertical alignment */
+    flex-direction: column; /* Stack image and content */
+    text-decoration: none;
+    background-color: var(--card-bg);
+    /* Larger radius for softer, premium feel */
+    border-radius: 20px;
+    overflow: hidden;
+    /* Remove initial border for cleaner look */
+    border: none;
+    /* Use a more subtle initial shadow, or none */
+    box-shadow: 0 4px 15px rgba(var(--shadow-color-rgb, 0, 0, 0), 0.05);
+    /* Smoother, slightly longer transitions */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+                box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    height: 100%; /* Ensure consistent height for alignment */
+}
+
+.category-card:hover {
+    transform: translateY(-10px); /* Keep lift effect */
+    /* Slightly stronger, more defined shadow on hover */
+    box-shadow: 0 10px 30px rgba(var(--shadow-color-rgb, 0, 0, 0), 0.12);
+}
+
+.category-card__image-wrap {
+    aspect-ratio: 16 / 10; /* Or adjust e.g., 3/2 */
+    overflow: hidden;
+    background-color: var(--placeholder-bg);
+    position: relative; /* Needed if adding elements inside */
+    border-bottom: 1px solid var(--card-border); /* Subtle separator */
+}
+.category-card__image-wrap .image-placeholder {
+    display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
+}
+.category-card__image-wrap .image-placeholder .fa {
+     font-size: 2.5rem; color: var(--placeholder-text); opacity: 0.6;
+}
+
+
+.category-card__image-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.0);
+    /* Slower, smoother transition */
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.category-card:hover .category-card__image-wrap img {
+    transform: scale(1.12); /* More subtle zoom */
+}
+
+/* Content Area Styling */
+.category-card__content {
+    padding: calc(var(--base-spacing) * 2) calc(var(--base-spacing) * 2.2); /* Increase padding */
+    background-color: var(--card-bg);
+    /* Ensure content area fills remaining space */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    /* Center text content */
+    text-align: center;
+    justify-content: center; /* Vertically center if height allows */
+}
+
+/* Title Styling */
+.category-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem; /* Increase title size */
+    font-weight: 600;
+    color: var(--heading-color);
+    margin: 0 0 0.5em 0; /* Adjusted margin */
+    line-height: 1.35;
+    transition: color 0.3s ease-out;
+}
+
+.category-card:hover .category-card__title {
+     color: var(--primary-color); /* Use primary color for title hover */
+}
+
+
+/* CTA Reveal - More subtle */
+.category-card__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center CTA content */
+    gap: 0.6em; /* Space between text and icon */
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color-light); /* Start with lighter text color */
+    height: 0; /* Use height for transition instead of max-height */
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(5px); /* Start slightly down */
+    transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.3s ease-out 0.1s,
+                transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s,
+                color 0.3s ease-out;
+    margin-top: 0; /* Remove initial margin */
+}
+.category-card__cta .fa {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(0); /* Start arrow in place */
+    opacity: 1; /* Keep arrow visible */
+}
+
+.category-card:hover .category-card__cta {
+    height: 1.5em; /* Animate height to reveal (adjust based on font size) */
+    opacity: 1;
+    transform: translateY(0); /* Move up */
+    color: var(--secondary-color); /* Change color on hover */
+    margin-top: 0.5em; /* Add space only when revealed */
+}
+
+.category-card:hover .category-card__cta .fa {
+    transform: translateX(4px); /* Move arrow slightly right */
+}
+
+/* Dark Mode Adjustments */
+html.dark-mode .category-card {
+    /* Remove border in dark mode for cleaner look? */
+    border: none;
+    /* Slightly different shadow for dark mode */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background-color: var(--light-bg-color); /* Use slightly lighter dark bg */
+}
+html.dark-mode .category-card:hover {
+     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+html.dark-mode .category-card__image-wrap {
+     border-bottom: 1px solid var(--border-color); /* Keep separator */
+}
+html.dark-mode .category-card__content {
+     background-color: var(--light-bg-color);
+}
+html.dark-mode .category-card:hover .category-card__title {
+     color: var(--primary-color);
+}
+html.dark-mode .category-card:hover .category-card__cta {
+     color: var(--secondary-color);
+}
+
+
+/* Responsive */
+@media (max-width: 480px) {
+    .category-showcase-grid {
+        gap: var(--grid-gap, 2rem); /* Adjust gap */
+        grid-template-columns: 1fr; /* Single column */
+    }
+    .category-card__content {
+        padding: calc(var(--base-spacing) * 1.5) var(--base-spacing);
+    }
+    .category-card__title {
+         font-size: 1.15rem;
+    }
+}
+/* ============================================ */
+/* Quality Feature Section (Replaces Parallax)  */
+/* ============================================ */
+
+.quality-feature-section {
+    /* Background color is set by utility class (e.g., medium-bg or light-bg) */
+    /* Padding is set by utility class (section-padding) */
+    /* Text align is set by utility class (text-center) */
+}
+
+.quality-content {
+    max-width: 750px; /* Limit content width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quality-feature-section h2 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem); /* Adjust size */
+    font-weight: 700;
+    color: var(--heading-color); /* Use standard heading color */
+    line-height: 1.3;
+    margin-bottom: 0.75em;
+    text-shadow: none; /* Remove text shadow */
+}
+
+.quality-feature-section .quality-text { /* Style the paragraph */
+    font-size: 1.1rem; /* Adjust size */
+    line-height: 1.7;
+    color: var(--text-color-light); /* Use lighter text color */
+    margin-bottom: 2em; /* Space before button */
+}
+
+.quality-feature-section .quality-button { /* Style the button */
+    /* Use existing button styles, maybe slightly larger */
+    padding: 1.1em 2.5em;
+    font-size: 1rem;
+    /* Ensure button theme variables work correctly here */
+}
+
+/* Adjust dark mode text colors if needed based on background */
+html.dark-mode .quality-feature-section h2 {
+     color: var(--heading-color);
+}
+html.dark-mode .quality-feature-section .quality-text {
+     color: var(--text-color-light);
+}
+
+/* Ensure button colors work well on the chosen background in dark mode */
+/* Example if using medium-bg in dark mode */
+html.dark-mode .quality-feature-section.medium-bg .quality-button {
+   /* background-color: var(--primary-color); */ /* Already handled by button-accent potentially */
+   /* color: var(--black); */
+}
+html.dark-mode .quality-feature-section.medium-bg .quality-button:hover {
+   /* background-color: var(--link-hover-color); */
+}
+/* ================================================== */
+/* Feature Row (Side-by-Side - V4 Cosmetic Polish)    */
+/* ================================================== */
+
+.feature-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch; /* Keep columns equal height */
+    background-color: var(--light-bg-color); /* Base background for the row */
+    /* Remove padding from row, applied inside columns */
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+}
+html.dark-mode .feature-row {
+    background-color: var(--dark-bg, #1a1a1a); /* Use a specific dark bg if needed */
+    border-bottom-color: var(--border-color);
+}
+
+.feature-col {
+    box-sizing: border-box;
+    width: 100%;
+    flex: 1 1 100%;
+    /* Increased base padding, responsive */
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Add transition for hover effects */
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.3s ease-out; /* Add bg transition */
+}
+
+/* --- Hover effect for the entire column --- */
+.feature-col:hover {
+    transform: translateY(-6px); /* Subtle lift */
+    box-shadow: var(--shadow-medium); /* Add shadow on hover */
+}
+
+/* --- Define distinct backgrounds & styles --- */
+.feature-col.quality-col {
+    background-color: var(--card-bg); /* Use card background (often white/off-white) */
+}
+.feature-col.partner-col {
+    background-color: var(--light-bg-color); /* Use light grey */
+}
+
+/* Dark Mode column backgrounds */
+html.dark-mode .feature-col.quality-col {
+    background-color: var(--light-bg-color); /* Use lighter dark bg */
+}
+html.dark-mode .feature-col.partner-col {
+    background-color: var(--medium-bg-color); /* Use darker dark bg */
+}
+
+
+/* --- Desktop Layout & Dividing Line --- */
+@media (min-width: 992px) {
+    .feature-col {
+        flex: 1 1 50%;
+        width: 50%;
+        /* Increase padding even more on desktop */
+        padding: clamp(4rem, 8vw, 6rem) clamp(2.5rem, 6vw, 5rem);
+    }
+
+    /* --- Add Dividing Line --- */
+    .feature-col.quality-col {
+        /* Add border to the right of the first column */
+        border-right: 1px solid var(--border-color);
+    }
+    /* Adjust border color in dark mode */
+    html.dark-mode .feature-col.quality-col {
+         border-right-color: var(--border-color);
+    }
+
+    /* Keep other desktop layout adjustments from previous step */
+    .feature-col.quality-col .feature-col-content,
+    .feature-col.quality-col { text-align: left; align-items: flex-start; }
+    .feature-col.quality-col h2,
+    .feature-col.quality-col p { margin-left: 0; margin-right: 0; }
+
+    .feature-col.partner-col .feature-col-content { flex-direction: row; text-align: left; align-items: center; gap: 3rem; }
+    .feature-col.partner-col .partner-col-logo { max-width: 180px; flex: 0 0 180px; margin-bottom: 0; }
+    .feature-col.partner-col .partner-col-text { text-align: left; max-width: none; align-items: flex-start; }
+    .feature-col.partner-col .section-title::after { margin-left: 0; margin-right: auto; }
+}
+
+
+/* --- Content Adjustments (Review & Refine) --- */
+
+/* Quality Column */
+.feature-col.quality-col .feature-col-content { max-width: 580px; margin: 0 auto; } /* Adjust max-width */
+@media (min-width: 992px) {
+     .feature-col.quality-col .feature-col-content { margin-left: 0; } /* Align left on desktop */
+}
+.feature-col.quality-col h2 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.25; margin-bottom: 0.7em; }
+.feature-col.quality-col p { font-size: 1.1rem; line-height: 1.75; margin-bottom: 2em; color: var(--text-color); } /* Use standard text color */
+html.dark-mode .feature-col.quality-col p { color: var(--text-color); }
+.feature-col.quality-col .button { padding: 1.0em 2.4em; font-size: 1rem; font-weight: 600; } /* Refine button */
+
+
+/* Partner Column */
+@media (max-width: 991.98px) { /* Ensure content centers properly on mobile/tablet stack */
+    .feature-col.partner-col .feature-col-content { align-items: center; }
+    .feature-col.partner-col .partner-col-text { text-align: center; align-items: center;}
+     .feature-col.partner-col .section-title::after { margin-left: auto; margin-right: auto; }
+}
+.feature-col.partner-col .section-title { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 0.7em; }
+.feature-col.partner-col p { font-size: 1rem; line-height: 1.7; margin-bottom: 1.5em; color: var(--text-color-light); } /* Use lighter text here */
+html.dark-mode .feature-col.partner-col p { color: var(--text-color-light); }
+.feature-col.partner-col .text-link-arrow { font-size: 0.95rem; }
+
+
+/* Ensure button/link hover effects from previous steps are still active */
+.partner-col .text-link-arrow:hover { /* ... */ }
+.partner-col .text-link-arrow:hover .fa { /* ... */ }
+.quality-col .button:hover { /* ... standard button hover ... */ }

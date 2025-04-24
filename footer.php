@@ -18,11 +18,10 @@
 
                     <?php // Column 1: Company Info & Logo ?>
                     <div class="footer-col footer-col-info">
-                        <div class="footer-logo-container">
+                    <div class="footer-logo-container">
                              <a href="index.php" title="Rodals S.R.L. - Pagina Principală">
-                                 <?php // Use a white/light version of the logo if available in Admin/images/ ?>
-                                 <?php // Fallback to the standard logo if white version doesn't exist ?>
-                                 <img src="images/logo-white.svg" onerror="this.src='images/logo.svg'; this.onerror=null;" alt="Rodals Logo" class="footer-logo">
+                                 <?php // Updated to use the new transparent logo ?>
+                                 <img src="images/logo_transparent.png" alt="Rodals Logo" class="footer-logo">
                              </a>
                         </div>
                         <address class="company-address">
@@ -38,12 +37,12 @@
                              <li>
                                  <i class="fa fa-phone" aria-hidden="true"></i>
                                  <span class="contact-label">Telefon:</span>
-                                 <a href="tel:+37322422500">+373 22 422 500</a>
+                                 <a href="tel:+37322422500" class="js-copy-phone">+373 22 422 500</a>
                              </li>
                              <li>
                                  <i class="fa fa-fax" aria-hidden="true"></i>
                                  <span class="contact-label">Fax:</span>
-                                 <a href="tel:+37322422040">+373 22 422 040</a>
+                                 <a href="tel:+37322422040" class="js-copy-phone">+373 22 422 040</a>
                              </li>
                              <li>
                                   <i class="fa fa-envelope" aria-hidden="true"></i>

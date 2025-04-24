@@ -163,7 +163,7 @@
                          <?php $valueCurrentDelay += $valueDelayIncrement; ?>
                          <?php // Value 3: Parteneriat (Ensuring icon fa-handshake-o exists) - Animated ?>
                         <div class="value-item animate-on-scroll" data-animation="<?php echo $valueAnimationType; ?>" data-delay="<?php echo $valueCurrentDelay; ?>">
-                             <div class="value-icon"><i class="fa fa-handshake-o" aria-hidden="true"></i></div> <?php // Verified icon ?>
+                             <div class="value-icon"><i class="fa fa-link" aria-hidden="true"></i></div> <?php // Verified icon ?>
                              <h3 class="value-title">Parteneriat</h3>
                              <p class="value-description">Credem în puterea colaborării și construim relații solide, pe termen lung, bazate pe încredere și respect reciproc.</p>
                         </div>

@@ -122,15 +122,16 @@
         <header id="site-header" class="site-header">
             <div class="container header-container"> <?php // Flex container for header items ?>
 
-                <?php // Logo Area ?>
-                <div class="logo-container">
-                    <a id="companyLogoLink" href="index.php" title="Rodals S.R.L. - Pagina Principală">
-                        <?php // Ensure logo image exists ?>
-                        <img src="images/logo.svg" alt="Rodals Logo" class="logo-image">
-                    </a>
-                    <?php // Tagline (preserved) ?>
-                    <div id="tagLine" class="tagline">Excelență prin calitate și tehnologii</div>
-                </div>
+            <?php // Logo Area (Updated Structure) ?>
+             <div class="logo-container">
+                 <a id="companyLogoLink" href="index.php" title="Rodals S.R.L. - Pagina Principală">
+                     <?php // Logo Image ?>
+                     <img src="images/logo.svg" alt="Rodals Logo" class="logo-image">
+                     <?php // Tagline - MOVED INSIDE the <a> tag to make it clickable ?>
+                     <?php // <-- Tagline is now commented out ?>
+                 </a>
+                 <?php // Tagline div removed from outside the link ?>
+             </div>
 
                 <?php // Main Navigation Area ?>
                 <nav id="main-navigation" class="main-navigation" aria-label="Navigație Principală">

@@ -3,7 +3,7 @@
  * index.php
  *
  * The main homepage template for the Rodals site.
- * v7: No structural changes needed; relies on CSS/JS updates.
+ * v8: Implemented refined side-by-side feature row.
  */
 
     // --- Page Specific Variables ---
@@ -37,11 +37,6 @@
             <h1 class="hero-title animate-on-scroll" data-animation="fadeInDown" data-duration="1000">
                 Excelență în Ingrediente Alimentare
             </h1>
-            <?php /* --- Hero Subtitle Removed as requested in original prompt ---
-            <p class="hero-subtitle animate-on-scroll" data-animation="fadeInUp" data-delay="200">
-                Partenerul dumneavoastră pentru calitate și inovație în industria alimentară.
-            </p>
-            */ ?>
             <a href="products.php" class="button button-accent animate-on-scroll" data-animation="fadeInUp" data-delay="400">
                  Descoperă Produsele Noastre <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </a>
@@ -53,100 +48,103 @@
 
         <?php // --- Product Groups Section --- ?>
         <section class="ewf-section section-padding product-groups-section" aria-labelledby="product-groups-title">
-            <div class="container">
-                <?php // Animated section title ?>
-                <h2 id="product-groups-title" class="section-title animate-on-scroll" data-animation="fadeIn">
-                    Gama Noastră de Produse
-                </h2>
-                <div class="product-grid">
-                    <?php
-                        // Animation settings for the grid items
-                        $animationType = 'zoomIn';
-                        $delayIncrement = 80;
-                        $currentDelay = 0;
-                    ?>
-                    <?php // Loop through product groups and apply staggered animations ?>
-                    <?php foreach ($productGroups as $group): ?>
-                        <div class="product-grid-item animate-on-scroll" data-animation="<?php echo $animationType; ?>" data-delay="<?php echo $currentDelay; ?>">
-                            <a class="product-card" href="products.php#<?php echo htmlspecialchars($group['id']); ?>" title="Vezi produse din categoria <?php echo htmlspecialchars($group['title']); ?>">
-                                <div class="card-image-container">
-                                    <?php $imagePath = $group['image'] ?? ''; // Get image path ?>
-                                    <?php // Check if image file exists before displaying ?>
-                                    <?php if (!empty($imagePath) && file_exists($imagePath)): ?>
-                                        <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($group['alt']); ?>" loading="lazy">
-                                    <?php else: ?>
-                                        <?php // Display placeholder if image is missing ?>
-                                        <div class="image-placeholder small-placeholder">
-                                            <i class="fa fa-picture-o" aria-hidden="true"></i>
-                                            <span>Imagine<br>indisponibilă</span>
-                                        </div>
-                                    <?php endif; ?>
-                                    <?php // Overlay shown on hover (defined in CSS) ?>
-                                    <div class="card-image-overlay">
-                                        <span class="card-overlay-icon"><i class="fa fa-link"></i></span>
-                                    </div>
-                                </div>
-                                <div class="card-content">
-                                    <h3 class="card-title"><?php echo htmlspecialchars($group['title']); ?></h3>
-                                </div>
-                            </a>
-                        </div>
-                        <?php $currentDelay += $delayIncrement; // Increment delay for the next item ?>
-                    <?php endforeach; ?>
-                </div> <?php // end .product-grid ?>
-            </div> <?php // end .container ?>
+             <div class="container">
+                 <h2 id="product-groups-title" class="section-title animate-on-scroll" data-animation="fadeIn">
+                     Gama Noastră de Produse
+                 </h2>
+                <?php // Using the refined card structure from previous steps ?>
+                <div class="category-showcase-grid">
+                     <?php
+                         $animationType = 'fadeInUp';
+                         $delayIncrement = 100;
+                         $currentDelay = 0;
+                     ?>
+                     <?php foreach ($productGroups as $group): ?>
+                         <?php $imagePath = $group['image'] ?? ''; ?>
+                         <div class="category-card-wrapper animate-on-scroll" data-animation="<?php echo $animationType; ?>" data-delay="<?php echo $currentDelay; ?>">
+                             <a href="products.php#<?php echo htmlspecialchars($group['id']); ?>"
+                                class="category-card"
+                                title="Vezi produse din categoria <?php echo htmlspecialchars($group['title']); ?>">
+                                 <div class="category-card__image-wrap">
+                                      <?php if (!empty($imagePath) && file_exists($imagePath)): ?>
+                                         <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($group['alt']); ?>" loading="lazy">
+                                     <?php else: ?>
+                                         <div class="image-placeholder aspect-ratio-4-3">
+                                              <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                         </div>
+                                     <?php endif; ?>
+                                 </div>
+                                 <div class="category-card__content">
+                                     <h3 class="category-card__title"><?php echo htmlspecialchars($group['title']); ?></h3>
+                                     <div class="category-card__cta">
+                                         <span>Vezi Produse</span>
+                                         <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                     </div>
+                                 </div>
+                             </a>
+                         </div>
+                         <?php $currentDelay += $delayIncrement; ?>
+                     <?php endforeach; ?>
+                 </div> <?php // end .category-showcase-grid ?>
+             </div> <?php // end .container ?>
         </section> <?php // end .product-groups-section ?>
 
 
-        <?php // --- Parallax Section --- ?>
-        <section class="ewf-section parallax-section">
-            <?php // Parallax background image set via data attribute for JS plugin ?>
-            <div class="parallax-window"
-                 data-parallax="scroll"
-                 data-image-src="images/parallax-bg-1.jpg" <?php // Ensure this image exists ?>
-                 data-speed="0.4"> <?php // Control parallax speed ?>
-                 <?php // Animated content within the parallax section ?>
-                 <div class="container parallax-content text-center animate-on-scroll" data-animation="fadeIn">
-                     <h2>Calitate Europeană, Livrată Local</h2>
-                     <p>Parteneriatele noastre strategice vă aduc cele mai bune ingrediente direct în Moldova.</p>
+        <?php // --- NEW: Feature Row Wrapper --- ?>
+        <div class="feature-row ewf-section light-bg"> <?php // Apply bg to row ?>
+
+            <?php // --- Column 1: Quality Feature --- ?>
+            <div class="feature-col quality-col animate-on-scroll" data-animation="fadeInLeft" data-delay="100">
+                <div class="feature-col-content text-center"> <?php // Content wrapper ?>
+                     <h2 id="quality-title">Calitate Europeană, Livrată Local</h2>
+                     <p>Parteneriatele strategice vă aduc cele mai bune ingrediente și tehnologii direct în Moldova, asigurând standarde înalte.</p>
                      <a href="partners.php" class="button button-accent">Descoperă Partenerii</a>
                  </div>
-            </div> <?php // end .parallax-window ?>
-        </section> <?php // end .parallax-section ?>
-
-
-        <?php // --- Advertisement/Partner Section --- ?>
-        <?php // This section links to an external partner site ?>
-        <section class="ewf-section section-padding light-bg partner-section" aria-label="Partener Tehnologic">
-             <div class="container text-center animate-on-scroll" data-animation="fadeIn">
-                 <h2 class="section-title">Partener Tehnologic</h2>
-                 <p class="partner-link">
-                     Vizitați <a href="http://www.poleksdry.com/ru/index.html" target="_blank" rel="noopener noreferrer" class="stand-out">Poleks Dry</a> pentru soluții avansate de uscare a cerealelor.
-                 </p>
-                 <p class="partner-description">(<span lang="ru">Зерносушилки</span> / <span lang="en">Grain dryers</span>)</p>
             </div>
-        </section>
+            <?php // --- End Column 1 --- ?>
 
-        <?php // --- Optional: About Us Snippet Section --- ?>
+            <?php // --- Column 2: Partner Feature --- ?>
+            <div class="feature-col partner-col animate-on-scroll" data-animation="fadeInRight" data-delay="200">
+                 <div class="feature-col-content"> <?php // Content wrapper ?>
+                     <div class="partner-col-logo">
+                         <a href="http://www.poleksdry.com/ru/index.html" target="_blank" rel="noopener noreferrer" title="Vizitați Poleks Dry">
+                             <img src="images/logich-poleks.png" alt="Poleks Dry Logo">
+                         </a>
+                     </div>
+                     <div class="partner-col-text">
+                         <h2 class="section-title">Partener Tehnologic</h2> <?php // Simpler title ?>
+                         <p>Colaborăm cu Poleks Dry pentru soluții avansate și eficiente în uscarea cerealelor.</p>
+                         <a href="http://www.poleksdry.com/ru/index.html" target="_blank" rel="noopener noreferrer" class="text-link-arrow">
+                             Vizitează site-ul <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+            <?php // --- End Column 2 --- ?>
+
+        </div>
+        <?php // --- END: Feature Row Wrapper --- ?>
+
+
+        <?php // --- About Us Snippet Section --- ?>
+        <?php // Ensure this section uses standard padding/background utility classes ?>
         <section class="ewf-section section-padding about-snippet-section" aria-labelledby="about-snippet-title">
             <div class="container">
                  <div class="row ewf-valign--center">
-                     <?php // Animated text column ?>
                      <div class="col-md-7 about-snippet-text animate-on-scroll" data-animation="slideInLeft">
                          <h2 id="about-snippet-title" class="section-title text-left">Despre Rodals</h2>
                          <p>Înființată în 1998, Rodals S.R.L. a devenit un nume de referință în industria alimentară din Moldova. Oferim o gamă completă de ingrediente, aditivi și utilaje, susținute de expertiză tehnică și parteneriate durabile.</p>
                          <p>Ne dedicăm succesului partenerilor noștri prin calitate, inovație și servicii prompte, adaptate constant cerințelor pieței.</p>
                          <a href="about.php" class="button">Află Povestea Noastră</a>
                      </div>
-                     <?php // Animated image column ?>
                      <div class="col-md-5 about-snippet-image-container animate-on-scroll overlap-left" data-animation="slideInRight" data-delay="150">
-                         <?php $aboutImagePath = 'images/about-placeholder.jpg'; // Ensure this image exists ?>
+                         <?php // Using the specific image requested earlier ?>
+                         <?php $aboutImagePath = 'images/about/oficiu-2016.jpg'; ?>
                          <?php if (file_exists($aboutImagePath)): ?>
-                             <img src="<?php echo htmlspecialchars($aboutImagePath); ?>" alt="Echipa și sediul Rodals S.R.L." loading="lazy">
+                             <img src="<?php echo htmlspecialchars($aboutImagePath); ?>" alt="Sediul Rodals în 2016" loading="lazy">
                          <?php else: ?>
-                              <?php // Placeholder if the about image is missing ?>
                               <div class="image-placeholder large-placeholder aspect-ratio-4-3">
-                                 <span>Imagine Companie Rodals</span>
+                                 <span>Imagine Sediul Rodals (2016) Indisponibilă</span>
                               </div>
                          <?php endif; ?>
                      </div>
@@ -158,6 +156,5 @@
 
 <?php
     // --- Include Footer ---
-    // Includes site footer, dark mode toggle, back-to-top, script loading, closes </body>/</html>
     include 'footer.php';
 ?>

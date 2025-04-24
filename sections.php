@@ -3,7 +3,7 @@
  * sections.php
  *
  * The template for displaying specialized company sections/departments.
- * v5: Added "Mirodenii" section, updated image filenames based on user feedback, kept animations.
+ * v6: Added js-copy-phone class to manager phone links.
  */
 
     // --- Page Specific Variables ---
@@ -147,7 +147,9 @@
                                     <div class="manager-contact-info">
                                         <strong>Contact Manager Secție:</strong><br>
                                         <i class="fa fa-user" aria-hidden="true"></i> <?php echo htmlspecialchars($section['manager']); ?><br>
-                                        <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:<?php echo htmlspecialchars($section['phone']); ?>"><?php echo htmlspecialchars($section['phone_display'] ?? $section['phone']); ?></a>
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <?php // --- ADDED js-copy-phone class HERE --- ?>
+                                        <a href="tel:<?php echo htmlspecialchars($section['phone']); ?>" class="js-copy-phone"><?php echo htmlspecialchars($section['phone_display'] ?? $section['phone']); ?></a>
                                     </div>
                                     <?php endif; ?>
 

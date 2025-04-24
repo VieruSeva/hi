@@ -2,23 +2,25 @@
  * scripts.js
  *
  * Main JavaScript file for the Rodals Admin Site.
- * v10: Added Dark Mode Toggle functionality. Removed DesktopDropdownToggle.
+ * v12: Integrated Copy Phone Number functionality into existing structure.
  */
 
-(function() {
+(function() { // Start IIFE
     'use strict'; // Enforce stricter parsing and error handling
 
     // --- Configuration ---
     const CONFIG = {
         stickyHeaderThreshold: 50,
         backToTopThreshold: 300,
-        scrollAnimationThreshold: 0.15,
+        scrollAnimationThreshold: 0.15, // Adjusted animation trigger point
         lazyLoadMargin: '200px',
         debounceDelay: 100,
         throttleDelay: 150,
         preloaderFadeOutDuration: 500,
         parallaxSpeed: 0.4,
-        localStorageDarkModeKey: 'rodals-dark-mode' // Key for storing theme preference
+        localStorageDarkModeKey: 'rodals-dark-mode', // Key for storing theme preference
+        animationDuration: 0.8, // Default animation duration in seconds (matches CSS)
+        copyFeedbackDuration: 1500 // Duration for copy feedback message (in ms)
     };
 
     // --- Utility Functions ---
@@ -124,6 +126,8 @@
             this.headerElement = document.getElementById('site-header');
             if (!this.headerElement) return;
             this.isSticky = false;
+            // Store original header height (assuming CONFIG holds these if needed, otherwise calculate)
+            // this.originalHeight = this.headerElement.offsetHeight;
             this.bindEvents();
             this.checkStickyState(); // Initial check
         },
@@ -188,7 +192,8 @@
                         const target = entry.target;
                         const animationClass = target.dataset.animation || 'fadeInUp'; // Default animation
                         const delay = parseInt(target.dataset.delay, 10) || 0;
-                        const duration = parseInt(target.dataset.duration, 10) || CONFIG.animationDuration * 1000; // Use configured duration
+                        // Use CONFIG for default duration, allow override via data attribute
+                        const duration = parseInt(target.dataset.duration, 10) || (CONFIG.animationDuration * 1000) || 800;
 
                         // Ensure opacity is set before starting animation timer
                         target.style.opacity = '1';
@@ -196,7 +201,7 @@
                         setTimeout(() => {
                             target.style.animationDuration = `${duration}ms`;
                             target.classList.add('animated', animationClass);
-                            // Optional: remove animation classes after completion to prevent re-triggering on style changes
+                            // Optional: remove animation classes after completion
                             // target.addEventListener('animationend', () => {
                             //     target.classList.remove('animated', animationClass);
                             // }, { once: true });
@@ -227,7 +232,7 @@
             document.addEventListener('click', this.handleClickOutside.bind(this));
         },
         toggleMenu: function(event) {
-             if(event) event.stopPropagation(); // Prevent click outside logic
+             if(event) event.stopPropagation(); // Prevent click outside logic when toggle is clicked
 
             const isOpen = this.navigationContainer.classList.toggle('is-open');
             this.menuToggleButton.setAttribute('aria-expanded', isOpen);
@@ -236,10 +241,10 @@
             document.body.classList.toggle('mobile-menu-active', isOpen);
             if (isOpen) {
                  this.setupFocusTrap();
-                 // Delay focus slightly to ensure elements are visible after animation
+                 // Delay focus slightly to ensure elements are visible after animation/display change
                  setTimeout(() => this.firstFocusableElement?.focus(), 50);
             } else {
-                 // Refocus the toggle button if it was the element that triggered the close
+                 // Refocus the toggle button if focus was inside the menu or on the button itself
                  if (document.activeElement === this.menuToggleButton || this.menuList.contains(document.activeElement)) {
                      this.menuToggleButton.focus();
                  }
@@ -254,7 +259,7 @@
             if (!this.navigationContainer.classList.contains('is-open')) return;
             if (event.key === 'Escape' || event.key === 'Esc') { this.toggleMenu(); return; }
             if (event.key === 'Tab') {
-                if (!this.firstFocusableElement) return; // No focusable elements in menu
+                if (!this.firstFocusableElement) return; // No focusable elements
                 if (event.shiftKey) { // Shift + Tab
                     if (document.activeElement === this.firstFocusableElement) {
                         this.lastFocusableElement.focus();
@@ -272,7 +277,7 @@
              if (!this.navigationContainer.classList.contains('is-open')) return;
              // Close if click is not the toggle button and not inside the nav container itself
              if (!this.menuToggleButton.contains(event.target) && !this.navigationContainer.contains(event.target)) {
-                 this.toggleMenu(); // Pass no event here
+                 this.toggleMenu(); // Pass no event here to avoid issues
              }
          }
     };
@@ -284,125 +289,227 @@
             const link = event.target.closest('a[href^="#"]');
              if (!link || link.getAttribute('href') === '#') return; // Ignore empty or plain "#" links
 
-             // Check if the target element exists on the current page
             const targetId = link.getAttribute('href');
             let targetElement = null;
              try {
-                 targetElement = document.querySelector(targetId);
+                 // Ensure the selector is valid CSS
+                 if (targetId.length > 1 && targetId.startsWith('#') && !targetId.includes(' ')) {
+                      targetElement = document.querySelector(targetId);
+                 } else {
+                     console.warn(`SmoothScroll: Potentially invalid selector "${targetId}"`);
+                     return; // Don't proceed with invalid selectors
+                 }
             } catch (e) {
-                console.warn(`SmoothScroll: Invalid selector "${targetId}"`, e);
-                return; // Exit if selector is invalid
+                console.error(`SmoothScroll: Error querying selector "${targetId}"`, e);
+                return; // Exit if selector causes error
             }
 
             if (targetElement) {
                 event.preventDefault(); // Prevent default browser jump only if target exists on page
 
                 const header = document.getElementById('site-header');
-                // Check if header is sticky when calculating offset
                 const headerHeight = (header && header.classList.contains('is-sticky'))
-                                      ? CONFIG.headerHeightSticky
-                                      : (header ? CONFIG.headerHeight : 0);
+                                      ? (parseInt(getComputedStyle(header).height, 10) || 60) // Use computed or fallback sticky height
+                                      : (header ? (parseInt(getComputedStyle(header).height, 10) || 75) : 0); // Use computed or fallback normal height
 
                 const elementPosition = targetElement.getBoundingClientRect().top;
-                // Respect potential scroll-margin-top defined in CSS
                 const scrollMarginTop = parseInt(window.getComputedStyle(targetElement).scrollMarginTop || '0', 10);
-                // Calculate final offset, adding a small buffer (e.g., 16px)
-                const offsetPosition = window.scrollY + elementPosition - headerHeight - scrollMarginTop - 16;
+                const buffer = 16; // Small buffer space
+                const offsetPosition = window.scrollY + elementPosition - headerHeight - scrollMarginTop - buffer;
 
                 window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
 
-                 // Close mobile menu if open after clicking an anchor link
+                 // Close mobile menu if open
                  const mobileNav = document.getElementById('main-navigation');
                  if(mobileNav && mobileNav.classList.contains('is-open')) {
-                     // Ensure MobileMenu has been initialized before calling its methods
                      if (typeof MobileMenu !== 'undefined' && MobileMenu.toggleMenu) {
                          MobileMenu.toggleMenu();
                      }
                  }
             }
-            // If targetElement is not found, the default link behavior (potentially navigating away) is allowed
+            // If targetElement is not found, default link behavior is allowed
         }
     };
 
-    // --- NEW: Dark Mode Toggle Module ---
-    const DarkModeToggle = {
-        init: function() {
-            this.toggleButton = document.getElementById('dark-mode-toggle');
-            this.body = document.body;
-            if (!this.toggleButton) {
-                 console.warn('Dark mode toggle button not found.');
-                 return;
-             }
-             this.icon = this.toggleButton.querySelector('i.fa'); // Target Font Awesome icon
-             this.applyInitialTheme();
-            this.bindEvents();
-             console.log('Dark Mode Toggle Initialized.');
-        },
-        applyInitialTheme: function() {
-            try {
-                const savedPreference = localStorage.getItem(CONFIG.localStorageDarkModeKey);
-                if (savedPreference === 'dark') {
-                    this.enableDarkMode();
-                } else if (savedPreference === 'light') {
-                    this.disableDarkMode();
-                } else {
-                    // Optional: Check system preference if no preference is saved
-                    // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    //     this.enableDarkMode();
-                    // }
-                }
-            } catch (e) {
-                console.error('Could not access localStorage for dark mode preference.', e);
-            }
-        },
-        bindEvents: function() {
-            this.toggleButton.addEventListener('click', this.toggleDarkMode.bind(this));
-            // Optional: Listen for system preference changes
-            // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            //     if (localStorage.getItem(CONFIG.localStorageDarkModeKey) === null) { // Only change if no manual preference set
-            //         e.matches ? this.enableDarkMode(false) : this.disableDarkMode(false);
-            //     }
-            // });
-        },
-        toggleDarkMode: function() {
-            if (this.body.classList.contains('dark-mode')) {
-                this.disableDarkMode();
-            } else {
-                this.enableDarkMode();
-            }
-        },
-        enableDarkMode: function(savePreference = true) {
-            this.body.classList.add('dark-mode');
-            if (this.icon) {
+   // --- UPDATED: Dark Mode Toggle Module ---
+   const DarkModeToggle = {
+    init: function() {
+        this.toggleButton = document.getElementById('dark-mode-toggle');
+        // Target html element instead of body
+        this.htmlElement = document.documentElement; // <-- Changed from document.body
+        if (!this.toggleButton) {
+             console.warn('Dark mode toggle button not found.');
+             return;
+         }
+         this.icon = this.toggleButton.querySelector('i.fa');
+         // Note: Initial theme application still happens via inline script in <head>
+         // We just need to make sure the *toggle* function targets the right element
+         // and updates the button state correctly based on htmlElement.
+         this.updateButtonState(); // Update button based on initial state applied by inline script
+         this.bindEvents();
+         console.log('Dark Mode Toggle Initialized (targeting <html>).');
+    },
+    // applyInitialTheme function is removed as the inline script handles the initial state
+    bindEvents: function() {
+        this.toggleButton.addEventListener('click', this.toggleDarkMode.bind(this));
+    },
+    updateButtonState: function() {
+         const isDarkMode = this.htmlElement.classList.contains('dark-mode');
+         if (this.icon) {
+            if (isDarkMode) {
                 this.icon.classList.remove('fa-moon-o');
                 this.icon.classList.add('fa-sun-o');
+                this.toggleButton.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                this.icon.classList.remove('fa-sun-o');
+                this.icon.classList.add('fa-moon-o');
+                this.toggleButton.setAttribute('aria-label', 'Switch to dark mode');
             }
-            this.toggleButton.setAttribute('aria-label', 'Switch to light mode');
-            if (savePreference) {
-                try { localStorage.setItem(CONFIG.localStorageDarkModeKey, 'dark'); } catch (e) { console.error('Failed to save dark mode preference.', e); }
+         }
+    },
+    toggleDarkMode: function() {
+        // Toggle class on html element
+        const enabling = !this.htmlElement.classList.contains('dark-mode');
+        if (enabling) {
+            this.enableDarkMode();
+        } else {
+            this.disableDarkMode();
+        }
+    },
+    enableDarkMode: function(savePreference = true) {
+        // Add class to html element
+        this.htmlElement.classList.add('dark-mode'); // <-- Changed from this.body
+        this.updateButtonState(); // Update button based on new state
+        if (savePreference) {
+            try { localStorage.setItem(CONFIG.localStorageDarkModeKey, 'dark'); } catch (e) { console.error('Failed to save dark mode preference.', e); }
+        }
+        console.log('Dark mode enabled');
+    },
+    disableDarkMode: function(savePreference = true) {
+        // Remove class from html element
+        this.htmlElement.classList.remove('dark-mode'); // <-- Changed from this.body
+        this.updateButtonState(); // Update button based on new state
+        if (savePreference) {
+             try { localStorage.setItem(CONFIG.localStorageDarkModeKey, 'light'); } catch (e) { console.error('Failed to save light mode preference.', e); }
+         }
+         console.log('Dark mode disabled');
+    }
+};
+
+    // --- **NEW/REVISED** Copy Phone Number to Clipboard Module ---
+    // (Using the refined version from the previous step)
+    const CopyPhoneNumber = {
+        feedbackTimeout: null,
+
+        init: function() {
+            console.log('Initializing Phone Number Copy feature (v2)...');
+            document.body.addEventListener('click', this.handlePhoneClick.bind(this));
+        },
+
+        handlePhoneClick: function(event) {
+            const phoneElement = event.target.closest('.js-copy-phone');
+
+            if (!phoneElement) {
+                return; // Exit if not a copy target
+            }
+
+            // Check if the element is currently showing feedback
+            if (phoneElement.classList.contains('copy-feedback-active')) {
+                return; // Do nothing if already showing feedback
+            }
+
+            event.preventDefault(); // Prevent default action (like tel: link)
+
+            let phoneNumberToCopy = '';
+
+            // --- REVISED NUMBER EXTRACTION ---
+            // PRIORITY 1: Get number from 'href' if it's a 'tel:' link
+            if (phoneElement.tagName === 'A' && phoneElement.getAttribute('href')?.startsWith('tel:')) {
+                 phoneNumberToCopy = phoneElement.getAttribute('href').substring(4);
+                 // Simple cleaning: remove any non-digit characters except '+' at the beginning
+                 phoneNumberToCopy = phoneNumberToCopy.replace(/[^\d+]/g, '');
+                 // console.log(`Copied from href: ${phoneNumberToCopy}`);
+            }
+            // PRIORITY 2: Get number from a specific data attribute (if you add one)
+            else if (phoneElement.dataset.copyValue) {
+                 phoneNumberToCopy = phoneElement.dataset.copyValue;
+                 // console.log(`Copied from data-copy-value: ${phoneNumberToCopy}`);
+            }
+            // PRIORITY 3: Fallback to text content (clean aggressively)
+            else {
+                 let textContent = phoneElement.textContent || phoneElement.innerText || '';
+                 // Remove everything that's not a digit or the plus sign
+                 phoneNumberToCopy = textContent.replace(/[^+\d]/g, '');
+                 // console.log(`Copied from textContent (cleaned): ${phoneNumberToCopy}`);
+            }
+            // --- END REVISED EXTRACTION ---
+
+
+            // Ensure we actually got a number-like string
+            if (!phoneNumberToCopy || !/\d/.test(phoneNumberToCopy)) { // Check if it contains at least one digit
+                console.warn('Could not extract a valid phone number from:', phoneElement);
+                this.showFeedback(phoneElement, 'Format Invalid'); // Provide feedback
+                return;
+            }
+
+            // Use Clipboard API
+            if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+                navigator.clipboard.writeText(phoneNumberToCopy).then(() => {
+                    console.log(`Phone number copied: ${phoneNumberToCopy}`);
+                    this.showFeedback(phoneElement, 'Copiat!');
+                }).catch(err => {
+                    console.error('Failed to copy phone number: ', err);
+                    this.showFeedback(phoneElement, 'Eroare Copiere'); // More specific error
+                });
+            } else {
+                console.warn('Clipboard API not available.');
+                this.showFeedback(phoneElement, 'API Indisponibil'); // Feedback if API is missing
             }
         },
-        disableDarkMode: function(savePreference = true) {
-            this.body.classList.remove('dark-mode');
-             if (this.icon) {
-                 this.icon.classList.remove('fa-sun-o');
-                 this.icon.classList.add('fa-moon-o');
-             }
-            this.toggleButton.setAttribute('aria-label', 'Switch to dark mode');
-            if (savePreference) {
-                 try { localStorage.setItem(CONFIG.localStorageDarkModeKey, 'light'); } catch (e) { console.error('Failed to save light mode preference.', e); }
-             }
+
+        showFeedback: function(element, message) {
+            // Clear any existing feedback timeout to prevent conflicts
+            if (this.feedbackTimeout) {
+                 const previousElement = document.querySelector('.copy-feedback-active[data-original-text]'); // Find element currently showing feedback
+                 if(previousElement && previousElement.dataset.originalText) {
+                     previousElement.innerText = previousElement.dataset.originalText;
+                     previousElement.classList.remove('copy-feedback-active');
+                     delete previousElement.dataset.originalText;
+                 }
+                 clearTimeout(this.feedbackTimeout);
+                 this.feedbackTimeout = null;
+            }
+
+            // Store original text using dataset attribute if not already stored
+            if (!element.hasAttribute('data-original-text')) {
+                 element.dataset.originalText = element.innerText;
+            }
+
+            // Apply feedback
+            element.innerText = message;
+            element.classList.add('copy-feedback-active');
+
+            // Set timeout to revert
+            this.feedbackTimeout = setTimeout(() => {
+                 if (element && element.dataset.originalText) { // Check element still exists and has data
+                     element.innerText = element.dataset.originalText;
+                     element.classList.remove('copy-feedback-active');
+                     delete element.dataset.originalText; // Clean up
+                 }
+                 this.feedbackTimeout = null; // Reset timeout ID
+            }, CONFIG.copyFeedbackDuration);
         }
     };
+    // --- End Copy Phone Number Module ---
 
 
-    // --- Initialization ---
+    // --- Initialization Function ---
     function initializeSite() {
         console.log('Rodals Site JS Initializing...');
         // Initialize Dark Mode FIRST to apply theme before other elements might measure/render
         DarkModeToggle.init();
 
-        // Initialize other modules
+        // Initialize other modules from your original file
         Preloader.init();
         LazyLoadImages.init();
         StickyHeader.init();
@@ -411,24 +518,21 @@
         MobileMenu.init();
         SmoothScroll.init();
 
-        // --- Initialize Vendor Plugins ---
+        // --- **ADD INITIALIZATION FOR THE NEW MODULE** ---
+        CopyPhoneNumber.init();
+        // --- END ---
+
+        // --- Initialize Vendor Plugins --- (Copied from your original file)
         if (typeof jQuery !== 'undefined') {
              console.log('jQuery detected. Initializing jQuery plugins...');
             // Initialize Parallax if library is loaded and elements exist
-            if (typeof jQuery.fn.parallax === 'function' && jQuery('.parallax-window').length > 0) {
-                 try {
-                     jQuery('.parallax-window').parallax({ speed: CONFIG.parallaxSpeed });
-                     console.log('Parallax initialized.');
-                 } catch (e) { console.error('Error initializing Parallax:', e); }
-             } else if (jQuery('.parallax-window').length > 0) {
-                console.warn('Parallax elements found, but parallax.min.js not loaded or loaded after this script.');
-             }
+            
         } else { console.warn('jQuery not loaded. Skipping jQuery plugin initialization.'); }
 
         console.log('Rodals Site JS Initialized.');
     }
 
-    // Wait for the DOM to be ready
+    // --- DOM Ready Execution --- (Copied from your original file)
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializeSite);
     } else {
