@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="592px" height="140px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 474 112"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID0" horiz-adv-x="666" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+	<font-face 
+		font-family="Arial">
+		<font-face-src>
+			<font-face-name name="Arial"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="A" horiz-adv-x="666" d="M-1.4882 0l274.644 716.002 104.174 0 291.51 -716.002 -107.824 0 -82.8432 216.994 -301.502 0 -77.6699 -216.994 -100.489 0zm205.974 293.991l244.029 0 -74.6935 198.498c-22.5002,60.343 -39.4728,110.162 -51.3075,149.529 -9.85047,-46.7012 -23.0317,-92.5165 -39.5082,-137.836l-78.5203 -210.191z"/>
+   <glyph unicode="T" horiz-adv-x="610" d="M258.982 0l0 631.989 -235.986 0 0 84.0125 567.004 0 0 -84.0125 -235.986 0 0 -631.989 -95.0322 0z"/>
+   <glyph unicode="E" horiz-adv-x="666" d="M79.0164 0l0 716.002 516.973 0 0 -84.0125 -421.976 0 0 -220.006 394.976 0 0 -83.977 -394.976 0 0 -243.994 438.984 0 0 -84.0125 -533.981 0z"/>
+   <glyph unicode="M" horiz-adv-x="833" d="M75.0124 0l0 716.002 141.981 0 169.336 -506.839c15.6615,-47.1618 27.0002,-82.4888 34.1577,-105.981 8.1851,25.9726 21.012,64.3115 38.3389,114.804l172.348 498.016 126.816 0 0 -716.002 -90.9928 0 0 599.001 -208.986 -599.001 -85.3589 0 -206.647 609.985 0 -609.985 -90.9928 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Arial";font-variant:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+    .fil2 {fill:#DC605C}
+    .fil1 {fill:#D42225;fill-rule:nonzero}
+    .fil0 {fill:#006CB5;fill-rule:nonzero}
+    .fnt0 {font-weight:normal;font-size:26.6519px;font-family:'Arial'}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M130 48c0,11 -8,20 -19,20 -12,0 -20,-9 -20,-21l0 0c0,-11 8,-20 20,-20 11,0 19,9 19,20l0 1zm-19 -30c-18,0 -31,13 -31,29l0 1c0,16 13,29 31,29 17,0 30,-13 30,-30l0 0c0,-16 -13,-29 -30,-29z"/>
+  <path class="fil1" d="M137 19l1 -19 -16 10c0,0 4,1 8,3 5,3 7,6 7,6z"/>
+  <path class="fil1" d="M91 82c-5,-3 -7,-6 -7,-6l-1 19 16 -10c0,0 -4,-1 -8,-3z"/>
+  <path class="fil0" d="M33 54c9,-2 14,-8 14,-17l0 0c0,-5 -2,-10 -5,-13 -3,-3 -9,-5 -16,-5l-26 0 0 57 10 0 0 -48 15 0c7,0 12,3 12,9l0 1c0,5 -5,9 -12,9l-8 0 6 9 14 20 12 0 -16 -22z"/>
+  <path class="fil0" d="M200 67c12,0 20,-8 20,-19l0 -1c0,-11 -8,-19 -20,-19l-11 0 0 39 11 0zm-21 -48l21 0c18,0 31,12 31,28l0 0c0,17 -13,29 -31,29l-21 0 0 -57z"/>
+  <polygon class="fil0" points="358,19 368,19 368,67 398,67 398,76 358,76 "/>
+  <path class="fil0" d="M454 43c-11,-3 -14,-5 -14,-9l0 0c0,-4 3,-7 9,-7 3,0 11,1 12,8l9 -2c-2,-12 -14,-15 -21,-15 -11,0 -19,7 -19,16l0 1c0,10 7,14 19,17 11,2 13,5 13,9l0 0c0,4 -4,7 -10,7 -7,0 -14,-2 -16,-9l-9 2c3,11 13,16 25,16 12,0 20,-6 20,-17l0 0c0,-10 -6,-14 -18,-17z"/>
+  <path class="fil0" d="M278 60l12 -21 11 21 -23 0zm31 16l12 0 -31 -58 -31 58 11 0 4 -7 32 0 3 7z"/>
+  <g transform="matrix(1 0 0 1 103.8 299.931)">
+   <text x="296" y="-188"  class="fil2 fnt0">M</text>
+   <text x="320" y="-188"  class="fil2 fnt0">E</text>
+   <text x="339" y="-188"  class="fil2 fnt0">A</text>
+   <text x="354" y="-188"  class="fil2 fnt0">T</text>
+  </g>
+ </g>
+</svg>

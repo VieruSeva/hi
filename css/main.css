@@ -1,0 +1,829 @@
+/*
+
+      CORPORATE COLORS
+
+        Main
+          Base blue: rgba(0, 113, 187, 1)
+          Base red: rgba(214, 29, 35, 1)
+
+        Additional
+          Additional light grey: rgba(198, 199, 195, 1)
+          Additional purple: rgba(181, 67, 135, 1)
+          Additional yellow: rgba(254, 195, 77, 1)
+          Additional light green: rgba(164, 206, 76, 1)
+          Additional pink: rgba(220, 99, 94, 1)
+          Additional grey: rgba(184, 168, 136, 1)
+
+      Text
+        Color: rgba(34, 34, 34, 1)
+
+        Link
+          Active: rgba(0, 113, 187, 1)
+          Hover: rgba(214, 29, 35, 1)
+
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+/*********************************************************************
+ * Base styles
+ */
+body {
+    color: rgba(34, 34, 34, 1);
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1em;
+}
+
+main a {
+    color: rgba(0, 113, 187, 1);
+    text-decoration: none;
+}
+
+main a:hover {
+    color: rgba(214, 29, 35, 1);
+}
+
+main a:focus {
+    outline: none;
+    box-shadow: 0 0 4px 1px rgba(0, 113, 187, 1);
+}
+
+/*
+ * END Base styles
+ ********************************************************************/
+
+/*********************************************************************
+ * Layout styles
+ */
+html {
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+.container {
+    align-items: center;
+}
+
+main {
+    flex: 1;
+    max-width: 70em;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ad {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 4px 1px #eee;
+}
+
+/*
+ * END Layout styles
+ ********************************************************************/
+
+/*********************************************************************
+ * Helper classes
+ */
+
+.stand-out {
+    font-weight: 700;
+}
+
+/*
+ * END Helper classes
+ ********************************************************************/
+
+/*********************************************************************
+ * Page header styles
+ */
+.page-header {
+
+}
+
+#companyLogo {
+    display: block;
+    background: url(../images/logo.svg) no-repeat 50% 50%;
+    height: 6em;
+    background-size: auto 60%;
+    color: transparent;
+}
+
+#tagLine {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.page-nav {
+    margin-top: 1em;
+    box-shadow: 0 0 2px 1px rgba(134, 134, 134, 1);
+}
+
+.page-nav ul {
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 113, 187, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+    text-transform: uppercase;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-nav li {
+    flex: 1;
+}
+
+.page-nav a {
+    color: inherit;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    min-height: 2.95em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 .3em;
+}
+
+.page-nav a:hover {
+    background: rgba(255, 255, 255, .1);
+}
+
+@media screen and (min-width: 60em) {
+    .page-nav ul {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .page-nav li a {
+        min-height: 3.95em;
+    }
+}
+
+/*
+ * END Page header styles
+ ********************************************************************/
+
+/*********************************************************************
+ * Page footer styles
+ */
+.page-footer {
+    background: rgba(0, 113, 187, 1);
+    /*background: rgba(67, 67, 67, 1);*/
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1em .4em;
+    color: rgba(255, 255, 255, 1);
+    flex-wrap: wrap;
+}
+
+.page-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.page-footer a:hover {
+    /*color: rgba(214, 29, 35, 1);*/
+    text-decoration: underline;
+}
+
+.company-address {
+    text-align: center;
+}
+
+.company-address p:first-child {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.company-contacts {
+    padding-top: 1em;
+    /*background: saddlebrown;*/
+}
+
+.company-contacts ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-contacts {
+    padding-top: 1.4em;
+    text-align: center;
+}
+
+.contact-mean {
+    font-weight: 700;
+}
+
+.page-footer ul {
+    margin: 0;
+}
+
+.page-footer p {
+    margin: 0;
+}
+
+.copyright-notice {
+    padding: 1em 0;
+    text-align: center;
+    font-weight: 700;
+}
+
+@media screen and (min-width: 60em) {
+    .page-footer {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .page-footer .col {
+        flex-basis: 40%;
+        padding: 0;
+    }
+    
+    .company-address {
+        text-align: right;
+    }
+
+    .company-contacts {
+        text-align: left;
+        margin-left: 2em;
+    }
+
+    .copyright-notice {
+        flex-basis: 100%;
+        margin-top: 1em;
+    }
+
+
+}
+
+/*
+ * END Page footer styles
+ ********************************************************************/
+
+/*********************************************************************
+ * Main content styles
+ */
+main {
+    padding: 1em 1.4em;
+}
+
+main h1 {
+    font-family: 'Raleway', sans-serif;
+}
+
+main > h1 {
+    text-align: center;
+    margin: 1.4em auto;
+}
+
+main section h1 {
+    font-size: 1.4em;
+}
+
+/*
+ * END Main content styles
+ ********************************************************************/
+
+
+/*********************************************************************
+ * Particular page styles
+ *********************************************************************/
+
+/*********************************************************************
+ * Main page
+ */
+.top-image {
+    background: url(../images/spices.jpg);
+    background-size: cover;
+    height: 15.26em;
+}
+
+.group-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.group-holder > a {
+    flex-basis: 45%;
+    text-align: center;
+    margin-bottom: 1em;
+    display: block;
+    color: inherit;
+}
+
+.group-holder > a:hover {
+    color: rgba(0, 113, 187, 1);
+}
+
+.group-holder p {
+    margin-top: .6em;
+    font-weight: 700;
+}
+
+.group-holder .group-image-container {
+    height: 24vw;
+    width: 24vw;
+    background: center no-repeat;
+    background-size: cover;
+    transition: all 180ms ease-in;
+    border: 1vw solid rgba(0, 113, 187, 1);
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.group-holder a:hover .group-image-container {
+    /*-webkit-transform: rotate(-30deg);*/
+    /*-webkit-transform-origin: 44% 50%;*/
+    /*transform: rotate(-30deg);*/
+    /*transform-origin: 44% 50%;*/
+}
+
+.group-image-container img {
+    width: 100%;
+    border: .4vw solid rgba(255, 255, 255, 1);
+    border-radius: 50%;
+}
+
+.announcement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.announcement-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(214, 29, 35, 1);
+    color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-family: Raleway, sans-serif;
+}
+
+.announcement-date span:nth-child(1) {
+    font-size: 3.4em;
+}
+
+.announcement-date span:nth-child(2) {
+    font-size: 1.5em;
+}
+
+.announcement-date span:nth-child(3) {
+    font-size: 1.5em;
+    padding-top: .2em;
+}
+
+.announcement-description {
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.announcement-description span {
+    font-style: italic;
+}
+
+/*
+.general .group-image-container {
+    background-image: url(../images/main-page/general.gif);
+}
+
+.meat .group-image-container {
+    background-image: url(../images/main-page/meat.gif);
+}
+
+.bakery .group-image-container {
+    background-image: url(../images/main-page/bakery.png);
+}
+
+.wine .group-image-container {
+    background-image: url(../images/main-page/wine.gif);
+}
+
+.canning .group-image-container {
+    background-image: url(../images/main-page/canning.gif);
+}
+
+.bakery-tools .group-image-container {
+    background-image: url(../images/main-page/bakery-tools.gif);
+}
+*/
+
+@media screen and (min-width: 40em) {
+    .group-holder > a {
+        flex-basis: 30%;
+    }
+
+    .group-holder {
+        max-width: 70em;
+        margin: 0 auto;
+    }
+
+    .group-holder .group-image-container {
+        height: 16vw;
+        width: 16vw;
+    }
+
+    .announcement {
+        flex-direction: row;
+    }
+
+    .announcement-date {
+        flex-shrink: 0;
+        margin-right: 2em;
+    }
+}
+
+/*
+ * END Main page
+ ********************************************************************/
+
+
+/*********************************************************************
+ * Products page
+ */
+
+main > section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+section.product-group {
+
+}
+
+.product-group h1 {
+    flex-basis: 100%;
+}
+
+.product-group .product-notice {
+    flex-basis: 100%;
+}
+
+.product-notice {
+    background: rgba(198, 199, 195, .4);
+    padding: .8em 1em 1em;
+    margin-bottom: 1em;
+}
+
+.product-notice a {
+    padding-left: .3em;
+}
+
+.product-notice i {
+    font-size: 1.4em;
+    transform: translateY(0.1em);
+}
+
+.product-container {
+    text-align: center;
+    flex-basis: 48%;
+}
+
+.product-container img {
+    width: 80%;
+}
+
+.product-title {
+    margin-top: .2em;
+    margin-bottom: 2em;
+}
+
+@media screen and (min-width: 30em) {
+    .product-container {
+        flex-basis: 32%;
+    }
+}
+
+@media screen and (min-width: 40em) {
+    .product-container {
+        flex-basis: 21%;
+    }
+}
+
+@media screen and (min-width: 50em) {
+    .product-container {
+        flex-basis: 16%;
+    }
+}
+
+/*
+ * END Products page
+ ********************************************************************/
+
+
+/*********************************************************************
+ * Sections page
+ */
+
+.sections-desc {
+    margin-bottom: 1em;
+    display: block;
+}
+
+.sections-container > section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+    padding-bottom: .4em;
+    border-bottom: 2px solid;
+}
+
+.herbs-spices-section {
+    border-bottom-color: rgba(164, 206, 76, 1);
+}
+
+.meat-section {
+    border-bottom-color: rgba(220, 99, 94, 1);
+}
+
+.wine-section {
+    border-bottom-color: rgba(181, 67, 135, 1);
+}
+
+.canning-section {
+    border-bottom-color: rgba(184, 168, 136, 1);
+}
+
+.bakery-section {
+    border-bottom-color: rgba(254, 195, 77, 1);
+}
+
+.bakery-tools-section {
+    border-bottom-color: rgba(254, 195, 77, 1);
+}
+
+.sections-container > section > img {
+    width: 100%;
+}
+
+.herbs-spices-section .section-logo {
+    background-image: url(../images/logo-mirodenii.svg);
+}
+
+.meat-section .section-logo {
+    background-image: url(../images/logo-carne.svg);
+}
+
+.wine-section .section-logo {
+    background-image: url(../images/logo-vin.svg);
+}
+
+.canning-section .section-logo {
+    background-image: url(../images/logo-conserve.svg);
+}
+
+.bakery-section .section-logo {
+    background-image: url(../images/logo-panificatie.svg);
+}
+
+.bakery-tools-section .section-logo {
+    background-image: url(../images/logo-utilaj.svg);
+}
+
+.section-info .section-logo {
+    background-size: 6em;
+    background-position: right top;
+    background-repeat: no-repeat;
+    height: 2em;
+    text-indent: -10000px;
+}
+
+.section-info p {
+    margin: 0;
+}
+
+.section-info p:nth-child(2n) {
+    margin-top: .4em;
+}
+
+@media screen and (min-width: 45em) {
+    .sections-desc {
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2;
+        -webkit-column-gap: 1.6em;
+        -moz-column-gap: 1.6em;
+        column-gap: 1.6em;
+        margin-bottom: 2em;
+    }
+
+    .section-info .section-logo {
+        height: 2em;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .sections-container > section {
+        flex-direction: row;
+        align-items: flex-start;
+        padding-bottom: .1em;
+    }
+
+    .sections-container > section > img {
+        height: 12em;
+        width: auto;
+        margin-top: auto;
+    }
+
+    .section-info {
+        padding-left: 1em;
+        flex: 1;
+    }
+
+    .section-info .section-logo {
+        margin: 0 auto 0;
+        height: 2em;
+        background-size: 6em;
+    }
+}
+
+/*
+ * END Sections page
+ ********************************************************************/
+
+
+
+/*********************************************************************
+ * Contacts page
+ */
+
+.contacts-container {
+    width: 100%;
+}
+
+.contacts-data {
+    margin-bottom: 1.6em;
+}
+
+.contacts-data p {
+    margin: .2em 0;
+}
+
+.contacts-map {
+    width: 100%;
+    height: 17em;
+    transition: all 180ms ease-in;
+}
+
+@media screen and (min-width: 50em) {
+    .contacts-map {
+        height: 25em;
+    }
+}
+
+/*
+ * END Sections page
+ ********************************************************************/
+
+
+/*********************************************************************
+ * About page
+ */
+
+.about {
+}
+
+.about p {
+    line-height: 1.6em;
+    font-size: 18px;
+}
+
+.short-story,
+.company-vision,
+.company-mission {
+}
+
+.short-story h1,
+.company-vision h1,
+.company-mission h1 {
+    font-size: 1.6em;
+    margin-top: 1em;
+}
+
+.short-story figure,
+.company-vision figure,
+.company-mission figure {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.short-story figcaption,
+.company-vision figcaption,
+.company-mission figcaption {
+    text-align: center;
+    font-style: italic;
+}
+
+.short-story img,
+.company-vision img,
+.company-mission img {
+    width: 100%;
+}
+
+.company-vision p {
+    margin: 0;
+}
+
+@media screen and (min-width: 40em) {
+    .short-story figure,
+    .company-vision figure,
+    .company-mission figure {
+        width: 50%;
+    }
+}
+
+/*
+ * END About page
+ ********************************************************************/
+
+
+/*********************************************************************
+ * Partners page
+ */
+
+.partners {
+    margin-bottom: 40px;
+}
+
+.partners__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.partners__partner {
+    width: 70%;
+    margin: 20px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partners__partner-figure {
+
+}
+
+.partners__partner-link {
+    outline: none;
+    display: block;
+}
+
+.partners__partner-link:focus {
+    box-shadow: none;
+}
+
+.partners__partner-logo {
+    width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+    .partners__partner {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 40em) {
+    .partners__partner {
+        width: 33.33%;
+    }
+}
+
+@media screen and (min-width: 50em) {
+    .partners__partner {
+        width: 25%;
+    }
+}
+
+/*
+ * END Partners page
+ ********************************************************************/
