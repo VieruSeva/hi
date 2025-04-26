@@ -6,7 +6,7 @@
  * Includes DOCTYPE, head section (meta, title, CSS), opening body tag,
  * preloader (if enabled), and site header/navigation structure.
  * v12: Added inline script to prevent dark mode flicker.
- * MODIFIED: Inline SVG + Compass Overlay. Centered compass graphic (X=692).
+ * MODIFIED: FINAL - Centered SVG + Compass Overlay. Symmetrical original arrows via <use>, scaled, transform animation.
  */
 
  // Placeholder for potential product category data (if needed elsewhere, not used in nav now)
@@ -119,13 +119,16 @@
             <?php // Logo Area (Updated Structure) ?>
              <div class="logo-container">
                  <a id="companyLogoLink" href="index.php" title="Rodals S.R.L. - Pagina Principală">
-                     <?php // --- START: Inline SVG Logo (Centered compass overlay) --- ?>
+                     <?php // --- START: Inline SVG Logo (Centered, Symmetrical original arrows using <use>) --- ?>
                      <svg id="rodals-logo-svg" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2905px" height="584px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 2905 584" xmlns:xlink="http://www.w3.org/1999/xlink" class="logo-image">
                       <defs>
+                        <?php // Define the shape for ONE arrow using the ORIGINAL complex top arrow path data ?>
+                        <path id="arrow-shape" class="fil1" d="M754 61l0 2c7,0 21,5 27,8 13,5 34,17 45,26 3,3 6,5 9,8 3,4 6,7 10,9l5 -114 -84 54c-3,2 -8,6 -12,7z"/>
+
                        <style type="text/css">
                         <![CDATA[
                          .fil0 {fill:#006BB3;} /* Blue Letters */
-                         .fil1 {fill:#D32124;} /* Red Original Arrows */
+                         .fil1 {fill:#D32124;} /* Red Arrow Fill */
                          /* --- Compass Overlay Styles --- */
                          .fil_dot_compass {fill:#444444;}
                          .fil_needle_north {fill:#D32124;}
@@ -133,15 +136,15 @@
 
                          /* --- Base State --- */
                          #spinning-elements {
-                           /* Original transform-origin */
-                           transform-origin: 655px 292px; /* <-- Centered X=692 */
+                           /* Centered transform-origin */
+                           transform-origin: 692px 292px;
                            animation: spin 4s linear infinite;
                            opacity: 1;
                          }
 
                          #compass-final-overlay {
-                           /* Original transform-origin */
-                           transform-origin: 655px 292px; /* <-- Centered X=692 */
+                           /* Centered transform-origin */
+                           transform-origin: 692px 292px;
                            opacity: 0;
                            transform: scale(0.7);
                            pointer-events: none;
@@ -193,20 +196,19 @@
                          <polygon class="fil0" points="2200,470 2449,470 2449,413 2263,413 2263,114 2200,114 "/>
                          <?php // --- End Text --- ?>
 
-                         <?php // --- Spinning Arrows Group (Scaled, original paths, CENTERED transform-origin attribute) --- ?>
-                         <g id="spinning-elements" transform="scale(0.95)" transform-origin="655 292"> <?php // Origin X back to 692 ?>
-                           <path id="arrow-top" class="fil1" d="M754 61l0 2c7,0 21,5 27,8 13,5 34,17 45,26 3,3 6,5 9,8 3,4 6,7 10,9l5 -114 -84 54c-3,2 -8,6 -12,7z"/>
-                           <path id="arrow-bottom" class="fil1" d="M513 584c3,-1 19,-12 24,-15 9,-6 69,-44 71,-47 -28,-7 -60,-22 -81,-43l-6 -7c-3,-2 1,0 -3,-2 0,22 -3,47 -3,70l-2 44z"/>
+                         <?php // --- Spinning Arrows Group (Using <use> with ORIGINAL top arrow path, centered) --- ?>
+                         <g id="spinning-elements" transform="scale(0.95)" transform-origin="692 292">
+                            <?php // Draw the top arrow using the defined shape (original path) ?>
+                            <use xlink:href="#arrow-shape" />
+                            <?php // Draw the bottom arrow by rotating the defined shape ?>
+                            <use xlink:href="#arrow-shape" transform="rotate(180 692 292)" />
                          </g>
 
                          <?php // --- Compass Overlay Group (Centered) --- ?>
                          <g id="compass-final-overlay">
-                              <?php // Center dot centered ?>
-                              <circle class="fil_dot_compass" cx="692" cy="292" r="25"/> <?php // cx back to 692 ?>
-                              <?php // North Needle centered ?>
-                              <polygon class="fil_needle_north" points="692,142 642,292 742,292 "/> <?php // X coordinates back to original centered values ?>
-                              <?php // South Needle centered ?>
-                              <polygon class="fil_needle_south" points="642,292 692,442 742,292 "/> <?php // X coordinates back to original centered values ?>
+                              <circle class="fil_dot_compass" cx="692" cy="292" r="25"/>
+                              <polygon class="fil_needle_north" points="692,142 642,292 742,292 "/>
+                              <polygon class="fil_needle_south" points="642,292 692,442 742,292 "/>
                          </g>
 
                        </g> <?php // end _666223916560 ?>
