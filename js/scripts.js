@@ -3,6 +3,7 @@
  *
  * Main JavaScript file for the Rodals Admin Site.
  * v12: Integrated Copy Phone Number functionality into existing structure.
+ * MODIFIED: Added LogoCompassHover module.
  */
 
 (function() { // Start IIFE
@@ -397,7 +398,6 @@
 };
 
     // --- **NEW/REVISED** Copy Phone Number to Clipboard Module ---
-    // (Using the refined version from the previous step)
     const CopyPhoneNumber = {
         feedbackTimeout: null,
 
@@ -426,51 +426,43 @@
             // PRIORITY 1: Get number from 'href' if it's a 'tel:' link
             if (phoneElement.tagName === 'A' && phoneElement.getAttribute('href')?.startsWith('tel:')) {
                  phoneNumberToCopy = phoneElement.getAttribute('href').substring(4);
-                 // Simple cleaning: remove any non-digit characters except '+' at the beginning
                  phoneNumberToCopy = phoneNumberToCopy.replace(/[^\d+]/g, '');
-                 // console.log(`Copied from href: ${phoneNumberToCopy}`);
             }
             // PRIORITY 2: Get number from a specific data attribute (if you add one)
             else if (phoneElement.dataset.copyValue) {
                  phoneNumberToCopy = phoneElement.dataset.copyValue;
-                 // console.log(`Copied from data-copy-value: ${phoneNumberToCopy}`);
             }
             // PRIORITY 3: Fallback to text content (clean aggressively)
             else {
                  let textContent = phoneElement.textContent || phoneElement.innerText || '';
-                 // Remove everything that's not a digit or the plus sign
                  phoneNumberToCopy = textContent.replace(/[^+\d]/g, '');
-                 // console.log(`Copied from textContent (cleaned): ${phoneNumberToCopy}`);
             }
             // --- END REVISED EXTRACTION ---
 
-
-            // Ensure we actually got a number-like string
-            if (!phoneNumberToCopy || !/\d/.test(phoneNumberToCopy)) { // Check if it contains at least one digit
+            if (!phoneNumberToCopy || !/\d/.test(phoneNumberToCopy)) {
                 console.warn('Could not extract a valid phone number from:', phoneElement);
-                this.showFeedback(phoneElement, 'Format Invalid'); // Provide feedback
+                this.showFeedback(phoneElement, 'Format Invalid');
                 return;
             }
 
-            // Use Clipboard API
             if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
                 navigator.clipboard.writeText(phoneNumberToCopy).then(() => {
                     console.log(`Phone number copied: ${phoneNumberToCopy}`);
                     this.showFeedback(phoneElement, 'Copiat!');
                 }).catch(err => {
                     console.error('Failed to copy phone number: ', err);
-                    this.showFeedback(phoneElement, 'Eroare Copiere'); // More specific error
+                    this.showFeedback(phoneElement, 'Eroare Copiere');
                 });
             } else {
                 console.warn('Clipboard API not available.');
-                this.showFeedback(phoneElement, 'API Indisponibil'); // Feedback if API is missing
+                this.showFeedback(phoneElement, 'API Indisponibil');
             }
         },
 
         showFeedback: function(element, message) {
-            // Clear any existing feedback timeout to prevent conflicts
+            // Clear any existing timeout and reset previous element
             if (this.feedbackTimeout) {
-                 const previousElement = document.querySelector('.copy-feedback-active[data-original-text]'); // Find element currently showing feedback
+                 const previousElement = document.querySelector('.copy-feedback-active[data-original-text]');
                  if(previousElement && previousElement.dataset.originalText) {
                      previousElement.innerText = previousElement.dataset.originalText;
                      previousElement.classList.remove('copy-feedback-active');
@@ -480,27 +472,66 @@
                  this.feedbackTimeout = null;
             }
 
-            // Store original text using dataset attribute if not already stored
+            // Store original text if not already stored (handles rapid clicks)
             if (!element.hasAttribute('data-original-text')) {
                  element.dataset.originalText = element.innerText;
             }
 
-            // Apply feedback
+            // Display feedback
             element.innerText = message;
             element.classList.add('copy-feedback-active');
 
             // Set timeout to revert
             this.feedbackTimeout = setTimeout(() => {
-                 if (element && element.dataset.originalText) { // Check element still exists and has data
+                 if (element && element.dataset.originalText) {
                      element.innerText = element.dataset.originalText;
                      element.classList.remove('copy-feedback-active');
-                     delete element.dataset.originalText; // Clean up
+                     delete element.dataset.originalText; // Clean up data attribute
                  }
-                 this.feedbackTimeout = null; // Reset timeout ID
+                 this.feedbackTimeout = null; // Clear timeout reference
             }, CONFIG.copyFeedbackDuration);
         }
     };
     // --- End Copy Phone Number Module ---
+
+    // --- **NEW** Logo Compass Hover Effect ---
+    const LogoCompassHover = {
+        init: function() {
+            this.logoLink = document.getElementById('companyLogoLink');
+            this.logoSvg = document.getElementById('rodals-logo-svg'); // Get SVG by its new ID
+
+            if (!this.logoLink || !this.logoSvg) {
+                console.warn('Logo link or SVG element not found for compass hover effect.');
+                return;
+            }
+            this.bindEvents();
+            console.log('Logo Compass Hover Initialized.');
+        },
+
+        bindEvents: function() {
+            // Use mouseenter/mouseleave for hover effect
+            this.logoLink.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
+            this.logoLink.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+            // Use focus/blur for keyboard accessibility
+            this.logoLink.addEventListener('focus', this.handleMouseEnter.bind(this));
+            this.logoLink.addEventListener('blur', this.handleMouseLeave.bind(this));
+        },
+
+        handleMouseEnter: function() {
+            // Add the class to the SVG element itself
+            if (this.logoSvg) {
+                this.logoSvg.classList.add('logo-hovered');
+            }
+        },
+
+        handleMouseLeave: function() {
+            // Remove the class from the SVG element
+            if (this.logoSvg) {
+                this.logoSvg.classList.remove('logo-hovered');
+            }
+        }
+    };
+    // --- **END** Logo Compass Hover Effect ---
 
 
     // --- Initialization Function ---
@@ -518,15 +549,40 @@
         MobileMenu.init();
         SmoothScroll.init();
 
-        // --- **ADD INITIALIZATION FOR THE NEW MODULE** ---
+        // Initialize Copy Phone Number
         CopyPhoneNumber.init();
-        // --- END ---
+
+        // --- Initialize Logo Compass Hover Effect ---
+        LogoCompassHover.init();
+        // --- End Initialization ---
 
         // --- Initialize Vendor Plugins --- (Copied from your original file)
         if (typeof jQuery !== 'undefined') {
              console.log('jQuery detected. Initializing jQuery plugins...');
             // Initialize Parallax if library is loaded and elements exist
-            
+            // Check if Parallax.js is loaded and elements exist
+            if (typeof jQuery.fn.parallax === 'function' && $('.parallax-window').length) {
+                console.log('Initializing Parallax...');
+                 try {
+                    $('.parallax-window').parallax({
+                         androidFix: true, // Adjust if necessary
+                         iosFix: true,     // Adjust if necessary
+                         speed: CONFIG.parallaxSpeed,
+                         // You might need to explicitly set the image path if data-parallax="scroll" and data-image-src isn't sufficient
+                         // imageSrc: $(this).data('image-src') // Example if path is in data-attribute
+                    });
+                     console.log('Parallax initialized successfully.');
+                } catch (e) {
+                    console.error('Error initializing Parallax:', e);
+                }
+            } else {
+                if (typeof jQuery.fn.parallax !== 'function') console.warn('Parallax function not found on jQuery.');
+                if (!$('.parallax-window').length) console.warn('No parallax window elements found.');
+            }
+
+            // Add other jQuery plugin initializations here if needed...
+            // e.g., Slick Carousel, Sticky Kit
+
         } else { console.warn('jQuery not loaded. Skipping jQuery plugin initialization.'); }
 
         console.log('Rodals Site JS Initialized.');
@@ -534,9 +590,11 @@
 
     // --- DOM Ready Execution --- (Copied from your original file)
     if (document.readyState === 'loading') {
+        // Loading hasn't finished yet
         document.addEventListener('DOMContentLoaded', initializeSite);
     } else {
-        initializeSite(); // DOM already ready
+        // `DOMContentLoaded` has already fired
+        initializeSite();
     }
 
 })(); // End IIFE

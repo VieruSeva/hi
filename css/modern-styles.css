@@ -1220,3 +1220,40 @@ html.dark-mode .feature-col.partner-col p { color: var(--text-color-light); }
 .partner-col .text-link-arrow:hover { /* ... */ }
 .partner-col .text-link-arrow:hover .fa { /* ... */ }
 .quality-col .button:hover { /* ... standard button hover ... */ }
+/* --- Animation CSS --- */
+#spinning-elements {
+    /* Sets the center point for the rotation.
+       These coordinates (692px 292px) are based on the SVG's viewBox
+       and are an estimate for the center of the blue 'O'.
+       You might need to adjust these slightly for perfect centering. */
+    transform-origin: 692px 292px;
+
+    /* Applies the 'spin' animation */
+    /* 4s = duration (how long one full spin takes) */
+    /* linear = constant speed (no easing) */
+    /* infinite = loops forever */
+    animation: spin 4s linear infinite;
+  }
+
+  /* Defines the rotation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg); /* Start rotation */
+    }
+    to {
+      transform: rotate(360deg); /* End rotation (completes a circle) */
+    }
+  }
+  /* --- SVG Logo Hover Effect --- */
+
+/* Base state for the logo parts are defined inline in the SVG <defs><style> */
+
+/* Keyframes are also defined inline in the SVG <defs><style> */
+
+/* Styles specific to dark mode colors can be added here if needed */
+html.dark-mode .fil_dot_final {
+    fill: #B0B0B0; /* Lighter grey for dark mode */
+  }
+  html.dark-mode .fil_needle_final {
+    fill: #F87070; /* Slightly lighter red for dark mode */
+  }
