@@ -509,13 +509,15 @@
         },
 
         bindEvents: function() {
-            // Use mouseenter/mouseleave for hover effect
-            this.logoLink.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
-            this.logoLink.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
-            // Use focus/blur for keyboard accessibility
-            this.logoLink.addEventListener('focus', this.handleMouseEnter.bind(this));
-            this.logoLink.addEventListener('blur', this.handleMouseLeave.bind(this));
-        },
+            // У вас уже есть эти обработчики — просто добавим переключение класса:
+            this.logoLink.addEventListener('mouseenter', () => {
+              this.logoSvg.classList.add('logo-hovered');
+            });
+            this.logoLink.addEventListener('mouseleave', () => {
+              this.logoSvg.classList.remove('logo-hovered');
+            });
+          }
+          ,
 
         handleMouseEnter: function() {
             // Add the class to the SVG element itself

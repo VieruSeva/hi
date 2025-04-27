@@ -1220,40 +1220,36 @@ html.dark-mode .feature-col.partner-col p { color: var(--text-color-light); }
 .partner-col .text-link-arrow:hover { /* ... */ }
 .partner-col .text-link-arrow:hover .fa { /* ... */ }
 .quality-col .button:hover { /* ... standard button hover ... */ }
-/* --- Animation CSS --- */
+/* --- Обновлённые стили анимации логотипа (в конец modern-styles.css) --- */
 #spinning-elements {
-    /* Sets the center point for the rotation.
-       These coordinates (692px 292px) are based on the SVG's viewBox
-       and are an estimate for the center of the blue 'O'.
-       You might need to adjust these slightly for perfect centering. */
     transform-origin: 692px 292px;
-
-    /* Applies the 'spin' animation */
-    /* 4s = duration (how long one full spin takes) */
-    /* linear = constant speed (no easing) */
-    /* infinite = loops forever */
     animation: spin 4s linear infinite;
+    transition: transform 1s ease-out, opacity 1s ease-out;
   }
-
-  /* Defines the rotation */
+  #compass-final-overlay {
+    transform-origin: 692px 292px;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    pointer-events: none;
+  }
+  #rodals-logo-svg.logo-hovered #spinning-elements {
+    animation: spinOutFade 1s ease-out forwards;
+  }
+  #rodals-logo-svg.logo-hovered #compass-final-overlay {
+    animation: compassFadeInScale 1s ease-out 0.3s forwards;
+    pointer-events: auto;
+  }
   @keyframes spin {
-    from {
-      transform: rotate(0deg); /* Start rotation */
-    }
-    to {
-      transform: rotate(360deg); /* End rotation (completes a circle) */
-    }
+    from { transform: rotate(0deg) scale(0.95); }
+    to   { transform: rotate(360deg) scale(0.95); }
   }
-  /* --- SVG Logo Hover Effect --- */
-
-/* Base state for the logo parts are defined inline in the SVG <defs><style> */
-
-/* Keyframes are also defined inline in the SVG <defs><style> */
-
-/* Styles specific to dark mode colors can be added here if needed */
-html.dark-mode .fil_dot_final {
-    fill: #B0B0B0; /* Lighter grey for dark mode */
+  @keyframes spinOutFade {
+    from { transform: rotate(0deg) scale(0.95); opacity: 1; }
+    to   { transform: rotate(360deg) scale(0);    opacity: 0; }
   }
-  html.dark-mode .fil_needle_final {
-    fill: #F87070; /* Slightly lighter red for dark mode */
+  @keyframes compassFadeInScale {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1);    }
   }
+  
